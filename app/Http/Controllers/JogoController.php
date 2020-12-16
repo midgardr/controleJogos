@@ -122,7 +122,8 @@ class JogoController extends Controller
             $jogo->save();
             DB::commit();
             return redirect()->back()->with(['tipo'=>'success', 'mensagem'=>"Jogo atualizado!"]);
-        } catch (\Exception $e){
+        } catch (\Exception $e)
+        {
             DB::rollBack();
             return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
         }
@@ -130,14 +131,17 @@ class JogoController extends Controller
     public function delete(Jogo $jogo)
     {
         DB::beginTransaction();
-        try{
-            if(!empty($jogo->print)){
+        try
+        {
+            if(!empty($jogo->print))
+            {
                 File::delete(storage_path('app/public/jogos') . $jogo->print);
             }
             $jogo->delete();
             DB::commit();
             return redirect()->back()->with(['tipo'=>'success', 'mensagem'=>"Jogo apagado!"]);
-        } catch (\Exception $e){
+        } catch (\Exception $e)
+        {
             DB::rollBack();
             return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
         }

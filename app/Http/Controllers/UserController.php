@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password], $request->remember))
         {
-            return redirect()->route('restrita');
+            return redirect()->route('dashboard');
         }
         return redirect()->back()->with(['tipo'=>'warning', 'mensagem'=>'E-mail e/ou senha inválido(s).']);
     }
@@ -54,7 +54,7 @@ class UserController extends Controller
             $user->psn_id = $request->psn_id;
             $user->password = bcrypt('platinador');
             $user->save();
-            return redirect()->route('restrita.usuario.edit', $user)->with(['tipo'=>'success', 'mensagem'=>"Usuário {$user->name} cadastrado com sucesso!"]);
+            return redirect()->route('usuario.edit', $user)->with(['tipo'=>'success', 'mensagem'=>"Usuário {$user->name} cadastrado com sucesso!"]);
         } catch (\Exception $e)
         {
             return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
@@ -96,5 +96,9 @@ class UserController extends Controller
             DB::rollBack();
             return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
         }
+    }
+
+    public function dashboard(){
+
     }
 }
