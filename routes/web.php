@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', ['as'=>'formLogin', 'uses'=> function () {
-    return view('index');
+    return view('login');
 }]);
 Route::post('/auth/login', ['as'=>'postLogin', 'uses'=>'UserController@login']);
 Route::get('login', ['as'=>'login', 'uses'=>'UserController@notAuthorized']);
