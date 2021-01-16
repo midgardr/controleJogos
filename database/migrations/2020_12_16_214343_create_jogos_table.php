@@ -18,10 +18,11 @@ class CreateJogosTable extends Migration
             $table->biginteger('user_id')->unsigned();
             $table->string('titulo');
             $table->enum('plataforma', ['PS3', 'PS4', 'PSVita', 'PS5'])->default('PS4');
+            $table->enum('publisher', ['Activision Blizzard','505 Games','Aksys Games','Apple','Atlus','Bandai Namco','Capcom','Deep Silver','Devolver Digital','EA','Focus Home Interactive','Google','Koei Tecmo','Konami','Microsoft','NetEase','Nintendo','NIS America','Paradox Interactive','Sega','Slitherine Strategies','Square-Enix','Sony','Take-Two','Telltale Games','Tencent Games','Ubisoft','Warner Bros.','Zen Studios'])->default('Sony');
             $table->boolean('exclusivo')->default(false);
             $table->boolean('repetido')->default(false);
             $table->enum('dificuldade', ['Garapa','Fácil', 'Normal', 'Difícil', 'Insano'])->default('Normal');
-            $table->enum('situacao', ['Não lançado','A platinar', 'Platinando', 'Platinado'])->default('A platinar');
+            $table->enum('situacao', ['Não lançado','Não comprado','A jogar','Jogando','Platinado','Desistido'])->default('Não lançado');
             $table->dateTime('platinado_em')->nullable();
             $table->string('guia1')->nullable();
             $table->string('guia2')->nullable();

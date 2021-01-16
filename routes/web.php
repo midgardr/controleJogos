@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\JogoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,29 +15,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', ['as'=>'formLogin', 'uses'=> function () {
-    return view('login');
-}]);
-Route::post('/auth/login', ['as'=>'postLogin', 'uses'=>'UserController@login']);
-Route::get('login', ['as'=>'login', 'uses'=>'UserController@notAuthorized']);
-Route::get('/auth/logout', ['as'=>'logout', 'uses'=>'UserController@logout']);
-Route::get('/usuario', ['as'=>'usuario.cadastro', 'uses'=>'UserController@create']);
-Route::post('/usuario', ['as'=>'usuario.store', 'uses'=>'UserController@store']);
+Route::get('/', [UserController::class, 'formLogin'])->name('formLogin');
+Route::post('/auth/login', [UserController::class, 'login'])->name('postLogin');
+Route::get('login', [UserController::class, 'notAuthorized'])->name('login');
+Route::get('/cadastro', [UserController::class, 'create'])->name('usuario.cadastro');
+Route::post('/cadastro', [UserController::class, 'store'])->name('usuario.store');
 
-Route::group(['middleware'=>'auth'], function() {
-    Route::group(['prefix'=>'restrita/'], function(){
-        Route::get('', ['as'=>'dashboard', 'uses'=>'UserController@dashboard']);
-        Route::group(['prefix'=>'usuario/'], function(){
-            Route::get('/{user}', ['as'=>'usuario.edit', 'uses'=>'UserController@edit']);
-            Route::put('/{user}', ['as'=>'usuario.update', 'uses'=>'UserController@update']);
-            Route::get('/delete/{user}', ['as'=>'usuario.delete', 'uses'=>'UserController@delete']);
+Route::middleware('auth')->group(function(){
+    Route::get('/auth/logout', [UserController::class, 'logout'])->name('logout');
+    Route::prefix('restrita/')->group(function(){
+        Route::get('', [UserController::class, 'dashboard'])->name('dashboard');
+        Route::prefix('usuario/')->group(function(){
+            Route::get('/{user}', [UserController::class, 'edit'])->name('usuario.edit');
+            Route::put('/{user}', [UserController::class, 'update'])->name('usuario.update');
+            Route::get('/delete/{user}', [UserController::class, 'delete'])->name('usuario.delete');
         });
-        Route::group(['prefix'=>'jogos/'], function(){
-            Route::get('', ['as'=>'jogo.create', 'uses'=>'JogoController@create']);
-            Route::post('', ['as'=>'jogo.store', 'uses'=>'JogoController@store']);
-            Route::get('/{jogo}', ['as'=>'jogo.edit', 'uses'=>'JogoController@edit']);
-            Route::put('/{jogo}', ['as'=>'jogo.update', 'uses'=>'JogoController@update']);
-            Route::get('/delete/{jogo}', ['as'=>'jogo.delete', 'uses'=>'JogoController@delete']);
+        Route::prefix('jogo/')->group(function(){
+            Route::get('', [JogoController::class, 'index'])->name('jogo.index');
+            Route::get('cadastrar', [JogoController::class, 'create'])->name('jogo.create');
+            Route::post('', [JogoController::class, 'store'])->name('jogo.store');
+            Route::get('/{jogo}', [JogoController::class, 'edit'])->name('jogo.edit');
+            Route::put('/{jogo}', [JogoController::class, 'update'])->name('jogo.update');
+            Route::get('/delete/{jogo}', [JogoController::class, 'delete'])->name('jogo.delete');
         });
     });
 });

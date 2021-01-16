@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('psn_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('verificado')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

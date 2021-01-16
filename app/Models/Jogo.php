@@ -30,6 +30,14 @@ class Jogo extends Model
     public function getUpdatedAtAttribute(){
         return Carbon::parse($this->attributes['updated_at'])->format('d/m/Y H:i:s');
     }
+    public function getPlatinadoEmAttribute(){
+        return Carbon::parse($this->attributes['platinado_em'])->format('d/m/Y');
+    }
+    public function setPlatinadoEmAttribute($value){
+        if(!empty($value)){
+            $this->attributes['platinado_em'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        }
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
