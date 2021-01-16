@@ -2,28 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdc9378e-c5b2-40f5-b115-b869ce10d0e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/template.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/controleJogos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/controleJogos.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/javascript/inputmask.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/restrita/graficos.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Jogo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Jogo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_16_214343_create_jogos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_16_214343_create_jogos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/javascript/date-range-picker-settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/javascript/date-range-picker-settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/javascript/highchart-themes/highcharts-settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/javascript/highchart-themes/highcharts-settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/stylesheets/app.min.e0bb64e7.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/stylesheets/app.min.e0bb64e7.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/logo.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/cadastro.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cadastro.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/usuario/dados.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/usuario/dados.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/template.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +29,13 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -170,6 +172,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -204,7 +207,11 @@
       <workItem from="1610657923851" duration="416000" />
       <workItem from="1610722146781" duration="19255000" />
       <workItem from="1610745680410" duration="13759000" />
-      <workItem from="1610761260842" duration="7936000" />
+      <workItem from="1610761260842" duration="8229000" />
+      <workItem from="1610799103470" duration="4901000" />
+      <workItem from="1610808057594" duration="408000" />
+      <workItem from="1610810157637" duration="12114000" />
+      <workItem from="1610828449080" duration="4731000" />
     </task>
     <servers />
   </component>

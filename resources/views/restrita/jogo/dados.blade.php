@@ -4,7 +4,7 @@
     <ol class="breadcrumb navbar-text navbar-right no-bg">
         <li class="current-parent">
             <a class="current-parent" href="{{route('dashboard')}}">
-                <i class="fa fa-fw fa-home"></i>
+                <i class="fa fa-fw fa-pie-chart"></i>
             </a>
         </li>
         <li>
@@ -20,25 +20,25 @@
 @endsection
 @section('conteudo')
     <div class="row">
-        @if(isset($jogo))
+        @if(isset($jogo) && !empty($jogo->print))
             <div class="col-md-4">
                 <div class="panel panel-default b-a-2 no-bg b-gray-dark">
                     <div class="panel-body">
-                        <img src="{{ asset('storage/jogos/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block">
+                        <img src="{{ asset('storage/jogos/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block" data-toggle="modal" data-target="#printModal">
                     </div>
                 </div>
             </div>
         @endif
-        <div class="col-md-{{isset($jogo)?'8':'12'}}">
+        <div class="col-md-{{(isset($jogo) && !empty($jogo->print))?'8':'12'}}">
             <div class="panel panel-default b-a-2 no-bg b-gray-dark">
                 <div class="panel-body">
                     <h2 class="text-center f-w-300 m-b-0">{{isset($jogo)?'ATUALIZAR JOGO':'CASTRADAR NOVO JOGO'}}</h2>
-                    <form class="m-t-3" name="casdastro" method="post" action="{{isset($jogo)?route('jogo.update', $jogo):route('jogo.store')}}" enctype="multipart/form-data">
+                    <form class="m-t-3" name="cadastro" method="post" action="{{isset($jogo)?route('jogo.update', $jogo):route('jogo.store')}}" enctype="multipart/form-data">
                         @csrf
                         @if(isset($jogo))
                             @method('PUT')
                         @endif
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             <label for="name">Título</label>
                             <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título do jogo" value="{{isset($jogo)?$jogo->titulo:old('titulo')}}" required autofocus>
                         </div>
@@ -104,7 +104,7 @@
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                     <div id="daterangepicker-container">
-                                        <input type="text" class="form-control date" name="platinado_em" value="{{isset($jogo)?$jogo->platinado_em:old('platinado_em')}}">
+                                        <input type="text" class="form-control date" name="platinado_em" id="platinado_em" value="{{isset($jogo)?$jogo->platinado_em:old('platinado_em')}}">
                                     </div>
                                 </div>
                             </div>
@@ -134,17 +134,38 @@
                                 <label for="print">Print da platina</label>
                                 <div class="input-group select2-bootstrap-prepend">
                                     <span class="input-group-addon">
-                                        <i class="fa fa-paperclip"></i>
+                                        <i class="fa fa-image"></i>
                                     </span>
                                     <input type="file" name="print" id="print" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
-                        <button class="btn m-b-2 btn-primary">SALVAR</button>
-                        <a href="{{route('jogo.index')}}" class="btn m-b-2 btn-minsk">VOLTAR</a>
+                        <button class="btn m-b-2 btn-primary"><i class="fa fa-save"></i> SALVAR</button>
+                        <a href="{{route('jogo.create')}}" class="btn m-b-2 btn-success"><i class="fa fa-plus"></i> NOVO</a>
+                        <a href="{{route('jogo.index')}}" class="btn m-b-2 btn-minsk"><i class="fa fa-arrow-circle-left"></i> VOLTAR</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @if(isset($jogo) && !empty($jogo->print))
+    <!-- Modal -->
+    <div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{"{$jogo->titulo} - {$jogo->platinado_em}"}}</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('storage/jogos/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block">
+                    <h4 class="text-center">{!! "Plataforma: {$jogo->plataforma} - Publicado por: {$jogo->publisher} - Dificuldade da platina: {$jogo->dificuldade}"!!}</h4>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">FECHAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Live Demo -->
+    @endif
 @endsection

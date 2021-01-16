@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JogoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ Route::post('/cadastro', [UserController::class, 'store'])->name('usuario.store'
 Route::middleware('auth')->group(function(){
     Route::get('/auth/logout', [UserController::class, 'logout'])->name('logout');
     Route::prefix('restrita/')->group(function(){
-        Route::get('', [UserController::class, 'dashboard'])->name('dashboard');
+        Route::get('', [DashboardController::class, 'dashboard'])->name('dashboard');
         Route::prefix('usuario/')->group(function(){
             Route::get('/{user}', [UserController::class, 'edit'])->name('usuario.edit');
             Route::put('/{user}', [UserController::class, 'update'])->name('usuario.update');

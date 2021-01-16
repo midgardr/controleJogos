@@ -27,11 +27,15 @@ class JogoController extends Controller{
         'Capcom',
         'Deep Silver',
         'Devolver Digital',
+        'Disney Interactive Studios',
         'EA',
+        'Envolved Games',
         'Focus Home Interactive',
+        'Frozenbyte',
         'Google',
         'Koei Tecmo',
         'Konami',
+        'Lucas Arts',
         'Microsoft',
         'NetEase',
         'Nintendo',
@@ -39,10 +43,12 @@ class JogoController extends Controller{
         'Paradox Interactive',
         'Sega',
         'Slitherine Strategies',
+        'Square-Enix',
         'Sony',
         'Take-Two',
         'Telltale Games',
         'Tencent Games',
+        'THQ',
         'Ubisoft',
         'Warner Bros.',
         'Zen Studios',
@@ -72,19 +78,24 @@ class JogoController extends Controller{
         $queryMetricas = $this->jogo;
         $metricas = [];
         $metricas['todosJogos'] = $queryMetricas->all()->count();
+        $metricas['jogando'] = $queryMetricas->where('situacao', 'Jogando')->count();
         $metricas['exclusivos'] = $queryMetricas->where('exclusivo', 1)->count();
         $metricas['multiplataformas'] = $queryMetricas->where('exclusivo', 0)->count();
-        $metricas['naoPlatinados'] = $queryMetricas->where('situacao', '<>', 'Platinado')->count();
+        $metricas['naoPlatinados'] = $queryMetricas->whereNotIn('situacao',['Não lançado', 'Não comprado', 'Não platinado'])->count();
         $metricas['platinados'] = $queryMetricas->where('situacao', 'Platinado')->count();
         $metricas['ineditos'] = $queryMetricas->where('repetido', 0)->count();
         $metricas['repetidos'] = $queryMetricas->where('repetido', 1)->count();
+        $metricas['naoLancados'] = $queryMetricas->where('situacao', 'Não lançado')->count();
+        $metricas['naoComprados'] = $queryMetricas->where('situacao', 'Não comprado')->count();
+        $metricas['desistidos'] = $queryMetricas->where('situacao', 'Desistido')->count();
 
         $plataformas = $this->plataformas;
         $publishers = $this->publishers;
         $dificuldades = $this->dificuldades;
         $situacoes = $this->situacoes;
 
-        $queryJogos = $this->jogo->orderBy('titulo');
+
+        $queryJogos = $this->jogo->where('user_id', Auth::user()->id);
         if(!empty($request->titulo)){
             $queryJogos->where('titulo', 'LIKE', '%'.$request->titulo.'%');
         }
@@ -92,7 +103,7 @@ class JogoController extends Controller{
             $queryJogos->where('plataforma', $request->plataforma);
         }
         if(!empty($request->publisher)){
-            $queryJogos->where('plataforma', $request->plataforma);
+            $queryJogos->where('publisher', $request->publisher);
         }
         if(!empty($request->exclusivos)){
             $queryJogos->where('exclusivo', 1);
@@ -115,10 +126,19 @@ class JogoController extends Controller{
         if(!empty($request->naoPlatinados)){
             $queryJogos->where('situacao', '<>' , 'Platinado');
         }
+        if(!empty($request->naoLancados)){
+            $queryJogos->where('situacao', 'Não lançado');
+        }
+        if(!empty($request->jogando)){
+            $queryJogos->where('situacao', 'Jogando');
+        }
+        if(!empty($request->desistidos)){
+            $queryJogos->where('situacao', 'Desistido');
+        }
         if(!empty($request->situacao)){
             $queryJogos->where('situacao', $request->situacao);
         }
-        $jogos = $queryJogos->paginate(30);
+        $jogos = $queryJogos->orderBy('titulo')->paginate(10);
         return view('restrita.jogo.index', compact(['jogos', 'plataformas', 'publishers', 'dificuldades', 'situacoes', 'metricas']));
     }
 
@@ -135,6 +155,7 @@ class JogoController extends Controller{
             $jogo->user_id = Auth::user()->id;
             $jogo->titulo = $request->titulo;
             $jogo->plataforma = $request->plataforma;
+            $jogo->publisher = $request->publisher;
             $jogo->exclusivo = $request->exclusivo;
             $jogo->repetido = $request->repetido;
             $jogo->dificuldade = $request->dificuldade;
@@ -142,13 +163,12 @@ class JogoController extends Controller{
             $jogo->platinado_em = $request->platinado_em;
             $jogo->guia1 = $request->guia1;
             $jogo->guia2 = $request->guia2;
-            $jogo->print = $this->uploadFoto($request->print);
-            $jogo->save();
             if($request->hasFile('print')){
                 $jogo->print = $this->uploadFoto($request->print);
-                $jogo->save();
             }
-            return redirect()->route('jogo.edit', $jogo)->with(['tipo'=>'success', 'titulo'=>'Sucesso!', 'mensagem'=>"Novo jogo inserido!"]);
+            $jogo->save();
+            //return redirect()->route('jogo.edit', $jogo)->with(['tipo'=>'success', 'titulo'=>'Sucesso!', 'mensagem'=>"Novo jogo inserido!"]);
+            return redirect()->route('jogo.create');
         } catch (\Exception $e){
             return redirect()->back()->with(['tipo'=>'error', 'titulo'=>'Deu Ruim!', 'mensagem'=>$e->getMessage()])->withInput();
         }
@@ -170,6 +190,7 @@ class JogoController extends Controller{
             }
             $jogo->titulo = $request->titulo;
             $jogo->plataforma = $request->plataforma;
+            $jogo->publisher = $request->publisher;
             $jogo->exclusivo = $request->exclusivo;
             $jogo->repetido = $request->repetido;
             $jogo->dificuldade = $request->dificuldade;
@@ -211,9 +232,9 @@ class JogoController extends Controller{
     protected function uploadFoto($foto){
         $nome  =  $this->nomeFoto($foto);
         $caminho = storage_path('app/public/jogos/') . $nome;
-        Image::make($foto->getRealPath())->resize(600, null, function ($constraint) {
+        Image::make($foto->getRealPath())->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($caminho, 30);
+        })->save($caminho, 45);
         return $nome;
     }
 }

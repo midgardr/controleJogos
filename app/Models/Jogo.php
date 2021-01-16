@@ -14,6 +14,7 @@ class Jogo extends Model
         'user_id',
         'titulo',
         'plataforma',
+        'publisher',
         'exclusivo',
         'repetido',
         'dificuldade',

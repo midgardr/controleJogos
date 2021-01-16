@@ -4,7 +4,7 @@
     <ol class="breadcrumb navbar-text navbar-right no-bg">
         <li class="current-parent">
             <a class="current-parent" href="{{route('dashboard')}}">
-                <i class="fa fa-fw fa-home"></i>
+                <i class="fa fa-fw fa-pie-chart"></i>
             </a>
         </li>
         <li>
@@ -22,13 +22,15 @@
                 <!-- START Widget - Menu Pills Vertical -->
                 <ul class="nav nav-pills nav-stacked m-b-2">
                     <li role="presentation"{{empty($_GET)?' class=active':''}}><a href="{{route('jogo.index')}}">Todos os jogos <span class="badge pull-right">{{$metricas['todosJogos']}}</span> </a></li>
-                    <li role="presentation"{{isset($_GET['exclusivos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&exclusivos=true')}}">Apenas exclusivos <span class="badge pull-right">{{$metricas['exclusivos']}}</span> </a>
-                    </li>
-                    <li role="presentation"{{isset($_GET['multipltaformas'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&multipltaformas=true')}}">Apenas multiplataformas <span class="badge pull-right">{{$metricas['multiplataformas']}}</span> </a></li>
-                    <li role="presentation"{{isset($_GET['naoPlatinados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoPlatinados=true')}}">Apenas não platinados <span class="badge pull-right">{{$metricas['naoPlatinados']}}</span> </a></li>
-                    <li role="presentation"{{isset($_GET['platinados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&platinados=true')}}">Apenas platinados <span class="badge pull-right">{{$metricas['platinados']}}</span> </a></li>
-                    <li role="presentation"{{isset($_GET['ineditos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&ineditos=true')}}">Apenas inéditos <span class="badge pull-right">{{$metricas['ineditos']}}</span> </a></li>
-                    <li role="presentation"{{isset($_GET['repetidos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&repetidos=true')}}">Apenas repetidos <span class="badge pull-right">{{$metricas['repetidos']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['jogando'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&jogando=true')}}">Jogando <span class="badge pull-right">{{$metricas['jogando']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['platinados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&platinados=true')}}">Platinados <span class="badge pull-right">{{$metricas['platinados']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['naoPlatinados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoPlatinados=true')}}">Não platinados <span class="badge pull-right">{{$metricas['naoPlatinados']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['exclusivos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&exclusivos=true')}}">Exclusivos <span class="badge pull-right">{{$metricas['exclusivos']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['multipltaformas'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&multipltaformas=true')}}">Multiplataformas <span class="badge pull-right">{{$metricas['multiplataformas']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['ineditos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&ineditos=true')}}">Inéditos <span class="badge pull-right">{{$metricas['ineditos']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['repetidos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&repetidos=true')}}">Repetidos <span class="badge pull-right">{{$metricas['repetidos']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['naoLancados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoLancados=true')}}">Não lançados <span class="badge pull-right">{{$metricas['naoLancados']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['desistidos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&desistidos=true')}}">Desistidos <span class="badge pull-right">{{$metricas['desistidos']}}</span> </a></li>
                 </ul>
             </div>
         </div>
@@ -52,8 +54,8 @@
                     <div class="form-group">
                         <select name="publisher" id="single" class="form-control select2 select2-input">
                             <option value="">Publisher</option>
-                            @foreach($publishers as $publish)
-                                <option value="{{$publish}}"{{(isset($_GET['publish']) and $publish == $_GET['publish'])?' selected':''}}>{{$publish}}</option>
+                            @foreach($publishers as $publisher)
+                                <option value="{{$publisher}}"{{(isset($_GET['publisher']) and $publisher == $_GET['publisher'])?' selected':''}}>{{$publisher}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -127,6 +129,14 @@
                                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <i class="fa fa-bars m-r-1"></i> <span class="caret"></span> </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a href="{{route('jogo.edit', $jogo)}}"><i class="fa fa-fw text-gray-lighter fa-pencil m-r-1"></i> Editar</a></li>
+                                    @if(!empty($jogo->guia1))
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{$jogo->guia1}}" target="_blank"><i class="fa fa-fw text-gray-lighter fa-link m-r-1"></i> Guia 1</a></li>
+                                    @endif
+                                    @if(!empty($jogo->guia2))
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{$jogo->guia2}}" target="_blank"><i class="fa fa-fw text-gray-lighter fa-link m-r-1"></i> Guia 2</a></li>
+                                    @endif
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{route('jogo.delete', $jogo)}}"><i class="fa fa-fw text-gray-lighter fa-trash m-r-1"></i> Apagar</a></li>
                                 </ul>
@@ -135,7 +145,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8">Não há jogos registrados ainda! :(</td>
+                        <td colspan="8">Não há dados :(</td>
                     </tr>
                 @endforelse
             </tbody>

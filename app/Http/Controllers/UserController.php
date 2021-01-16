@@ -100,8 +100,4 @@ class UserController extends Controller{
             return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
         }
     }
-
-    public function dashboard(){
-        return view('restrita.dashboard');
-    }
 }

@@ -4,7 +4,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default b-a-2 no-bg b-gray-dark">
                 <div class="panel-heading text-center">
-                    CONTROLE DE PLATINA
+                    <img src="{{asset('img/logo4.png')}}" width="130">
                 </div>
                 <div class="panel-body">
                     <h2 class="text-center f-w-300 m-b-0">SEJA BEM VINDO</h2>

@@ -4,7 +4,7 @@
     <ol class="breadcrumb navbar-text navbar-right no-bg">
         <li class="current-parent">
             <a class="current-parent" href="{{route('dashboard')}}">
-                <i class="fa fa-fw fa-home"></i>
+                <i class="fa fa-fw fa-pie-chart"></i>
             </a>
         </li>
         <li>
@@ -20,7 +20,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default b-a-2 no-bg b-gray-dark">
                 <div class="panel-body">
-                    <h2 class="text-center f-w-300 m-b-0">ATUALIZE SEUS DADOS</h2>
+                    <h2 class="text-center f-w-300 m-b-0">ATUALIZAR MEUS DADOS</h2>
                     <form class="m-t-3" name="casdastro" method="post" action="{{route('usuario.update', $user)}}" enctype="application/x-www-form-urlencoded">
                         @method('PUT')
                         @csrf
@@ -49,7 +49,8 @@
                                 <input type="checkbox" required> <b>Declaro que não estou utilizando nesse cadastro a mesma senha que utilizo no meu e-mail ou PSN por motivos de segurança!</b>
                             </label>
                         </div>
-                        <button class="btn btn-block m-b-2 btn-primary">ATUALIZAR</button>
+                        <button class="btn btn-block m-b-2 btn-primary"><i class="fa fa-save"></i> ATUALIZAR</button>
+                        <a href="{{route('dashboard')}}" class="btn btn-block m-b-2 btn-minsk"><i class="fa fa-arrow-circle-left"></i> VOLTAR</a>
                     </form>
                 </div>
             </div>

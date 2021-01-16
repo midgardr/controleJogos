@@ -16,21 +16,8 @@
     <!-- SCSS Output -->
     <link rel="stylesheet" href="{{asset('assets/stylesheets/app.min.e0bb64e7.css?v=').uniqid()}}">
     <!-- START Favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('assets/images/favicons/apple-icon-57x57.png')}}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('assets/images/favicons/apple-icon-60x60.png')}}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/images/favicons/apple-icon-72x72.png')}}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/images/favicons/apple-icon-76x76.png')}}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('assets/images/favicons/apple-icon-114x114.png')}}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('assets/images/favicons/apple-icon-120x120.png')}}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/images/favicons/apple-icon-144x144.png')}}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('assets/images/favicons/apple-icon-152x152.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicons/apple-icon-180x180.png')}}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('assets/images/favicons/android-icon-192x192.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/favicons/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/images/favicons/favicon-96x96.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicons/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('img/logo1.png')}}">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{asset('assets/images/favicons/ms-icon-144x144.png')}}">
     <meta name="theme-color" content="#ffffff">
     <!-- END Favicon -->
     <!-- RSS -->
@@ -54,7 +41,7 @@
 <div id="initial-loader">
     <div>
         <div class="initial-loader-top">
-            <img class="initial-loader-logo" src="{{asset('img/logo.png')}}" alt="Loader">
+            <img class="initial-loader-logo img-responsive" src="{{asset('img/logo4.png')}}" alt="Loader">
             <div class="loader loader--style1">
                 <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewbox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
                     <g>
@@ -76,6 +63,11 @@
         <!-- START Navbar -->
         <div class="navbar-inverse navbar navbar-fixed-top">
             <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="current navbar-brand" href="{{route('dashboard')}}">
+                        <img class="h-20" src="{{asset('img/logo2.png')}}">
+                    </a>
+                </div>
                 <div class="collapse navbar-collapse" id="navbar">
                     <!-- START Right Side Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -166,6 +158,13 @@
                 }
                 notificacao();
             @endif
+            window.onload = function() {
+                MaskedInput({
+                    elm: document.getElementById('platinado_em'),
+                    format: '__/__/____',
+                    separator: '/'
+                });
+            };
             Dashboard.Helpers.elementExists('#daterangepicker-container', function() {
                 $('.date').daterangepicker({
                     singleDatePicker: true,
@@ -204,7 +203,10 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/css/lib.min.css')}}">
 <script src="{{asset('assets/vendor/js/highstock.min.js')}}"></script>
 <script src="{{asset('assets/javascript/highchart-themes/highcharts&highstock-theme.js')}}"></script>
-<script src="{{asset('assets/javascript/highchart-themes/highcharts-settings.js')}}"></script>
+@if(Route::currentRouteName() == 'dashboard')
+    @include('restrita.graficos')
+@endif
+<script src="{{asset('assets/javascript/inputmask.js')}}"></script>
 <script src="{{asset('assets/javascript/peity-settings.js')}}"></script>
 <script src="{{asset('assets/vendor/js/toastr.min.js')}}"></script>
 <script src="{{asset('assets/vendor/js/select2.min.js')}}"></script>

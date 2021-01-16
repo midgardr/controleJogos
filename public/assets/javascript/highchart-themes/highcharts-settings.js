@@ -70,6 +70,75 @@ $(function() {
                 }]
             });
     });
+    Dashboard.Helpers.elementExists('.platinas-por-ano', function() {
+        $(this).highcharts({
+            chart: {
+                renderTo: 'container',
+                backgroundColor: 'transparent',
+                type: 'line'
+            },
+            title: {
+                text: '',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '',
+                x: -20
+            },
+            xAxis: {
+                gridLineWidth: 1,
+                categories: ['2012', '2012', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            yAxis: {
+                gridLineWidth: 1,
+                title: {
+                    text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            legend: {
+                layout: 'horizontal',
+                align: 'right',
+                verticalAlign: 'bottom',
+                borderWidth: 0,
+                enabled: false,
+            },
+            series: [{
+                name: ' ',
+                type: 'area',
+                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 21.2, 26.5, 23.3, 18.3],
+                color: '#2E9BDA',
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, 'rgba(45, 153, 220, .4)'],
+                        [1, 'rgba(45, 153, 220, 0)']
+                    ]},
+                lineWidth: '1',
+                marker: {
+                    symbol: 'circle',
+                }
+            }]
+        });
+    });
 
     Dashboard.Helpers.elementExists('.jogos-por-dificuldade', function() {
         $(this).highcharts({
