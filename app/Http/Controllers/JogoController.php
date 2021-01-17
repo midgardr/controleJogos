@@ -88,6 +88,7 @@ class JogoController extends Controller{
         $metricas['naoLancados'] = $queryMetricas->where('situacao', 'Não lançado')->count();
         $metricas['naoComprados'] = $queryMetricas->where('situacao', 'Não comprado')->count();
         $metricas['desistidos'] = $queryMetricas->where('situacao', 'Desistido')->count();
+        $metricas['naoGarapas'] = $queryMetricas->where('dificuldade', '<>', 'Garapa')->count();
 
         $plataformas = $this->plataformas;
         $publishers = $this->publishers;
@@ -137,6 +138,9 @@ class JogoController extends Controller{
         }
         if(!empty($request->situacao)){
             $queryJogos->where('situacao', $request->situacao);
+        }
+        if(!empty($request->naoGarapas)){
+            $queryJogos->where('dificuldade', '<>', 'Garapa');
         }
         $jogos = $queryJogos->orderBy('titulo')->paginate(10);
         return view('restrita.jogo.index', compact(['jogos', 'plataformas', 'publishers', 'dificuldades', 'situacoes', 'metricas']));
@@ -220,6 +224,12 @@ class JogoController extends Controller{
             return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
         }
     }
+    public function galeria(){
+        $galeria = $this->jogo->whereNotNull('print')->orderBy('id', 'ASC')->paginate(21);
+        return view('restrita.jogo.galeria', compact('galeria'));
+    }
+
+
     public function nomeFoto($foto){
         $nome = uniqid(time()) . '.'. $foto->getClientOriginalExtension();
         $dir = storage_path('app/public/jogos/');

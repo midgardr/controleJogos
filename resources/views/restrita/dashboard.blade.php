@@ -11,6 +11,9 @@
         <li>
             <i class="fa fa-fw fa-gamepad"></i> <a href="{{route('jogo.index')}}">MEUS JOGOS</a>
         </li>
+        <li>
+            <i class="fa fa-fw fa-file-image-o"></i> <a href="{{route('galeria')}}">GALERIA DE PRINTS</a>
+        </li>
     </ol>
 @endsection
 @section('conteudo')

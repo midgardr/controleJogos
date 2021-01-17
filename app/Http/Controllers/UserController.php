@@ -51,8 +51,8 @@ class UserController extends Controller{
             $user = $this->user;
             try{
                 $user->name = $request->name;
-                $user->email = $request->email;
-                $user->psn_id = $request->psn_id;
+                $user->email = trim($request->email);
+                $user->psn_id = trim($request->psn_id);
                 $user->password = bcrypt('platinador');
                 $user->save();
                 return redirect()->route('formLogin')->with(['tipo'=>'success', 'Obrigado!', 'mensagem'=>"Seu cadastro foi realizado com sucesso! Verifique o seu e-mail para ativar o seu cadastro!"]);

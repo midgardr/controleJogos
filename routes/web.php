@@ -35,9 +35,10 @@ Route::middleware('auth')->group(function(){
             Route::get('', [JogoController::class, 'index'])->name('jogo.index');
             Route::get('cadastrar', [JogoController::class, 'create'])->name('jogo.create');
             Route::post('', [JogoController::class, 'store'])->name('jogo.store');
-            Route::get('/{jogo}', [JogoController::class, 'edit'])->name('jogo.edit');
-            Route::put('/{jogo}', [JogoController::class, 'update'])->name('jogo.update');
-            Route::get('/delete/{jogo}', [JogoController::class, 'delete'])->name('jogo.delete');
+            Route::get('{jogo}', [JogoController::class, 'edit'])->name('jogo.edit');
+            Route::put('{jogo}', [JogoController::class, 'update'])->name('jogo.update');
+            Route::get('{jogo}/delete', [JogoController::class, 'delete'])->name('jogo.delete');
         });
+        Route::get('galeria', [JogoController::class, 'galeria'])->name('galeria');
     });
 });

@@ -13,6 +13,9 @@
         <li class="active">
             <i class="fa fa-fw fa-gamepad"></i> MEUS JOGOS
         </li>
+        <li>
+            <i class="fa fa-fw fa-file-image-o"></i> <a href="{{route('galeria')}}">GALERIA DE PRINTS</a>
+        </li>
     </ol>
 @endsection
 @section('conteudo')
@@ -31,6 +34,7 @@
                     <li role="presentation"{{isset($_GET['repetidos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&repetidos=true')}}">Repetidos <span class="badge pull-right">{{$metricas['repetidos']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['naoLancados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoLancados=true')}}">Não lançados <span class="badge pull-right">{{$metricas['naoLancados']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['desistidos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&desistidos=true')}}">Desistidos <span class="badge pull-right">{{$metricas['desistidos']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['naoGapras'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoGarapas=true')}}">Sem garapas <span class="badge pull-right">{{$metricas['naoGarapas']}}</span> </a></li>
                 </ul>
             </div>
         </div>
@@ -138,7 +142,7 @@
                                         <li><a href="{{$jogo->guia2}}" target="_blank"><i class="fa fa-fw text-gray-lighter fa-link m-r-1"></i> Guia 2</a></li>
                                     @endif
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{{route('jogo.delete', $jogo)}}"><i class="fa fa-fw text-gray-lighter fa-trash m-r-1"></i> Apagar</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#modalJjogoDelete" data-jogo-id="{{$jogo->id}}" data-mensagem="Deseja realmente excluir o jogo {{$jogo->titulo}}"><i class="fa fa-fw text-gray-lighter fa-trash m-r-1"></i> Apagar</a></li>
                                 </ul>
                             </div>
                         </td>
@@ -162,4 +166,23 @@
             </tfoot>
         </table>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalJjogoDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">ATENÇÃO</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center" id="mensagem"></h4>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                        <a href="" class="btn btn-primary" id="btnJogoDelete">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Live Demo -->
 @endsection

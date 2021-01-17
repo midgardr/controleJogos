@@ -64,9 +64,7 @@
         <div class="navbar-inverse navbar navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="current navbar-brand" href="{{route('dashboard')}}">
-                        <img class="h-20" src="{{asset('img/logo2.png')}}">
-                    </a>
+                    <h4>PSN ID: <a href="https://psnprofiles.com/{{Auth::user()->psn_id}}" target="_blank">{{Auth::user()->psn_id}}</a></h4>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar">
                     <!-- START Right Side Navbar -->
@@ -157,6 +155,32 @@
                     }
                 }
                 notificacao();
+            @endif
+            @if(Route::current()->getName()=='galeria')
+                $('#printModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+                    var titulo = button.data('titulo') // Extract info from data-* attributes
+                    var print = button.data('print') // Extract info from data-* attributes
+                    var descricao = button.data('descricao') // Extract info from data-* attributes
+                    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                    var modal = $(this)
+                    modal.find('#titulo').html(titulo);
+                    modal.find('#print').attr('src', print);
+                    modal.find('#descricao').html(descricao);
+                })
+            @endif
+            @if(Route::current()->getName()=='jogo.index')
+                $('#modalJjogoDelete').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+                    var jogoId = button.data('jogo-id') // Extract info from data-* attributes
+                    var mensagem = button.data('mensagem') // Extract info from data-* attributes
+                    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                    var modal = $(this)
+                    modal.find('#mensagem').html(mensagem);
+                    modal.find('#btnJogoDelete').attr('href', 'http://laravel.run/restrita/jogo/'+jogoId+'/delete');
+                })
             @endif
             window.onload = function() {
                 MaskedInput({
