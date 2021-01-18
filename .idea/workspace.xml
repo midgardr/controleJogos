@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdc9378e-c5b2-40f5-b115-b869ce10d0e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/galeria.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/galeria.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/galeria.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +202,9 @@
       <workItem from="1610799103470" duration="4901000" />
       <workItem from="1610808057594" duration="408000" />
       <workItem from="1610810157637" duration="12114000" />
-      <workItem from="1610828449080" duration="11027000" />
+      <workItem from="1610828449080" duration="11423000" />
+      <workItem from="1610893203191" duration="1587000" />
+      <workItem from="1610980924977" duration="6384000" />
     </task>
     <servers />
   </component>

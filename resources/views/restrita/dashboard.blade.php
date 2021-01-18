@@ -214,7 +214,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default no-bg b-a-2 b-gray-dark">
-                <div class="panel-heading">JOGOS POR PUBLISHER</div>
+                <div class="panel-heading">JOGOS POR PUBLISHER (AS 10 MELHORES)</div>
                 <div class="panel-body">
                     <div class="jogos-por-publisher"></div>
                 </div>

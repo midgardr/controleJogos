@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Webpatser\Uuid\Uuid;
 
 class User extends Authenticatable
 {
@@ -38,6 +39,13 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function($user){
+            $user->uuid = Uuid::generate(4);
+        });
+    }
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

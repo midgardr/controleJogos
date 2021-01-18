@@ -19,19 +19,19 @@ class DashboardController extends Controller
         $metricas['platinados'][1] = round($metricas['platinados'][0]*100/$metricas['jogosAdquiridos']);
         $metricas['naoPlatinados'][0] = $this->jogo->whereNotIn('situacao', ['Não lançado', 'Não comprado', 'Platinado'])->count();
         $metricas['naoPlatinados'][1] = round($metricas['naoPlatinados'][0]*100/$metricas['jogosAdquiridos']);
-        $metricas['exclusivos'][0] = $this->jogo->where('exclusivo', 1)->count();
+        $metricas['exclusivos'][0] = $this->jogo->where('exclusivo', 1)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
         $metricas['exclusivos'][1] = round($metricas['exclusivos'][0]*100/$metricas['jogosAdquiridos']);
-        $metricas['multiplataformas'][0] = $this->jogo->where('exclusivo', 0)->count();
+        $metricas['multiplataformas'][0] = $this->jogo->where('exclusivo', 0)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
         $metricas['multiplataformas'][1] = round($metricas['multiplataformas'][0]*100/$metricas['jogosAdquiridos']);
-        $metricas['unicos'][0] = $this->jogo->where('repetido', 0)->count();
+        $metricas['unicos'][0] = $this->jogo->where('repetido', 0)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
         $metricas['unicos'][1] = round($metricas['unicos'][0]*100/$metricas['jogosAdquiridos']);
-        $metricas['repetidos'][0] = $this->jogo->where('repetido', 1)->count();
+        $metricas['repetidos'][0] = $this->jogo->where('repetido', 1)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
         $metricas['repetidos'][1] = round($metricas['repetidos'][0]*100/$metricas['jogosAdquiridos']);
         $metricas['indiceCompletude'] = round($metricas['platinados'][0]*100/$metricas['jogosAdquiridos']);
 
         $graficos = [];
         $graficos['jogosPorPlataformas'] = DB::table('jogos')->selectRaw('plataforma, COUNT(*) AS qtd')->groupBy('plataforma')->orderBy('qtd', 'DESC')->get();
-        $graficos['jogosPorPublishers'] = DB::table('jogos')->selectRaw('publisher, COUNT(*) AS qtd')->groupBy('publisher')->orderBy('qtd', 'DESC')->get();
+        $graficos['jogosPorPublishers'] = DB::table('jogos')->selectRaw('publisher, COUNT(*) AS qtd')->groupBy('publisher')->orderBy('qtd', 'DESC')->where('publisher', '<>', 'Outra')->limit(10)->get();
         $graficos['jogosExclusivos'] = DB::table('jogos')->selectRaw('(CASE WHEN exclusivo = 1 THEN "EXCLUSIVO" ELSE "MULTIPLATAFORMA" END) AS exclusividade, COUNT(*) AS qtd')->groupBy('exclusividade')->orderBy('qtd', 'DESC')->get();
         $graficos['jogosPorDificuldade'] = DB::table('jogos')->selectRaw('dificuldade, COUNT(*) AS qtd')->groupBy('dificuldade')->orderBy('qtd', 'DESC')->get();
         $graficos['jogosUnicos'] = DB::table('jogos')->selectRaw('(CASE WHEN repetido = 1 THEN "REPETIPO" ELSE "ÚNICO" END) AS unicidade, COUNT(*) AS qtd')->groupBy('unicidade')->orderBy('qtd', 'DESC')->get();

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller{
     protected $user;
@@ -55,6 +56,10 @@ class UserController extends Controller{
                 $user->psn_id = trim($request->psn_id);
                 $user->password = bcrypt('platinador');
                 $user->save();
+                $dir = storage_path('app/public/'.$user->id.'/prints/');
+                if(!File::isDirectory($dir)){
+                    File::makeDirectory($dir, 0777, true, true);
+                }
                 return redirect()->route('formLogin')->with(['tipo'=>'success', 'Obrigado!', 'mensagem'=>"Seu cadastro foi realizado com sucesso! Verifique o seu e-mail para ativar o seu cadastro!"]);
             } catch (\Exception $e){
                 return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);

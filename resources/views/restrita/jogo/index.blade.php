@@ -29,12 +29,13 @@
                     <li role="presentation"{{isset($_GET['platinados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&platinados=true')}}">Platinados <span class="badge pull-right">{{$metricas['platinados']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['naoPlatinados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoPlatinados=true')}}">Não platinados <span class="badge pull-right">{{$metricas['naoPlatinados']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['exclusivos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&exclusivos=true')}}">Exclusivos <span class="badge pull-right">{{$metricas['exclusivos']}}</span> </a></li>
-                    <li role="presentation"{{isset($_GET['multipltaformas'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&multipltaformas=true')}}">Multiplataformas <span class="badge pull-right">{{$metricas['multiplataformas']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['multipltaformas'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&multipltaformas=true')}}">Multis <span class="badge pull-right">{{$metricas['multiplataformas']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['ineditos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&ineditos=true')}}">Inéditos <span class="badge pull-right">{{$metricas['ineditos']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['repetidos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&repetidos=true')}}">Repetidos <span class="badge pull-right">{{$metricas['repetidos']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['naoLancados'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoLancados=true')}}">Não lançados <span class="badge pull-right">{{$metricas['naoLancados']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['desistidos'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&desistidos=true')}}">Desistidos <span class="badge pull-right">{{$metricas['desistidos']}}</span> </a></li>
                     <li role="presentation"{{isset($_GET['naoGapras'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&naoGarapas=true')}}">Sem garapas <span class="badge pull-right">{{$metricas['naoGarapas']}}</span> </a></li>
+                    <li role="presentation"{{isset($_GET['somenteGuia'])?' class=active':''}}><a href="{{route('jogo.index', 'pesquisa=true&somenteGuia=true')}}">Com guia <span class="badge pull-right">{{$metricas['somenteGuia']}}</span> </a></li>
                 </ul>
             </div>
         </div>
@@ -95,12 +96,13 @@
             <thead>
             <tr>
                 <th class="small text-muted text-uppercase"><strong>Título</strong></th>
-                <th class="small text-muted text-uppercase"><strong>Plataforma</strong></th>
+                <th class="small text-muted text-uppercase text-center"><strong>Plataforma</strong></th>
                 <th class="small text-muted text-uppercase"><strong>Publisher</strong></th>
                 <th class="small text-muted text-uppercase"><strong>Dificuldade</strong></th>
                 <th class="small text-muted text-uppercase"><strong>Situação</strong></th>
-                <th class="small text-muted text-uppercase"><strong>Exclusivo</strong></th>
-                <th class="small text-muted text-uppercase"><strong>Repetido</strong></th>
+                <th class="small text-muted text-uppercase text-center"><strong>Exclusivo</strong></th>
+                <th class="small text-muted text-uppercase text-center"><strong>Repetido</strong></th>
+                <th class="small text-muted text-uppercase text-center"><strong>Platinado em</strong></th>
                 <th class="small text-muted text-uppercase text-right"><strong>Ações</strong></th>
             </tr>
             </thead>
@@ -111,7 +113,7 @@
                             <h5 class="m-b-0"><span>{{$jogo->titulo}}</span></h5>
                         </td>
                         <td class="v-a-m">
-                            <h5 class="m-b-0"><span>{{$jogo->plataforma}}</span></h5>
+                            <h5 class="m-b-0 text-center"><span>{{$jogo->plataforma}}</span></h5>
                         </td>
                         <td class="v-a-m">
                             <h5 class="m-b-0"><span>{{$jogo->publisher}}</span></h5>
@@ -123,10 +125,13 @@
                             <h5 class="m-b-0"><span>{{$jogo->situacao}}</span></h5>
                         </td>
                         <td class="v-a-m">
-                            <h5 class="m-b-0"><span>{{$jogo->exclusivo==1?'Sim':'Não'}}</span></h5>
+                            <h5 class="m-b-0 text-center"><span>{{$jogo->exclusivo==1?'Sim':'Não'}}</span></h5>
                         </td>
-                        <td class="v-a-m">
+                        <td class="v-a-m text-center">
                             <h5 class="m-b-0"><span>{{$jogo->repetido==1?'Sim':'Não'}}</span></h5>
+                        </td>
+                        <td class="v-a-m text-center">
+                            <h5 class="m-b-0"><span>{{!empty($jogo->platinado_em)?$jogo->platinado_em:'Não platinado ainda :('}}</span></h5>
                         </td>
                         <td class="text-right v-a-m">
                             <div class="dropdown">
@@ -149,13 +154,13 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8">Não há dados :(</td>
+                        <td colspan="9">Não há dados :(</td>
                     </tr>
                 @endforelse
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="8">
+                <td colspan="9">
                     @if(isset($_GET['pesquisa']))
                         {{ $jogos->appends($_GET)->links() }}
                     @else

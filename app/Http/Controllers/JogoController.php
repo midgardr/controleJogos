@@ -24,6 +24,7 @@ class JogoController extends Controller{
         'Apple',
         'Atlus',
         'Bandai Namco',
+        'Bethesda Softworks',
         'Capcom',
         'Deep Silver',
         'Devolver Digital',
@@ -45,7 +46,9 @@ class JogoController extends Controller{
         'Slitherine Strategies',
         'Square-Enix',
         'Sony',
+        'Studio MDHR',
         'Take-Two',
+        'Team Cherry',
         'Telltale Games',
         'Tencent Games',
         'THQ',
@@ -79,16 +82,17 @@ class JogoController extends Controller{
         $metricas = [];
         $metricas['todosJogos'] = $queryMetricas->all()->count();
         $metricas['jogando'] = $queryMetricas->where('situacao', 'Jogando')->count();
-        $metricas['exclusivos'] = $queryMetricas->where('exclusivo', 1)->count();
-        $metricas['multiplataformas'] = $queryMetricas->where('exclusivo', 0)->count();
-        $metricas['naoPlatinados'] = $queryMetricas->whereNotIn('situacao',['Não lançado', 'Não comprado', 'Não platinado'])->count();
+        $metricas['exclusivos'] = $queryMetricas->where('exclusivo', 1)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
+        $metricas['multiplataformas'] = $queryMetricas->where('exclusivo', 0)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
+        $metricas['naoPlatinados'] = $queryMetricas->whereNotIn('situacao',['Não lançado', 'Não comprado', 'Platinado'])->count();
         $metricas['platinados'] = $queryMetricas->where('situacao', 'Platinado')->count();
-        $metricas['ineditos'] = $queryMetricas->where('repetido', 0)->count();
-        $metricas['repetidos'] = $queryMetricas->where('repetido', 1)->count();
+        $metricas['ineditos'] = $queryMetricas->where('repetido', 0)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
+        $metricas['repetidos'] = $queryMetricas->where('repetido', 1)->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
         $metricas['naoLancados'] = $queryMetricas->where('situacao', 'Não lançado')->count();
         $metricas['naoComprados'] = $queryMetricas->where('situacao', 'Não comprado')->count();
         $metricas['desistidos'] = $queryMetricas->where('situacao', 'Desistido')->count();
-        $metricas['naoGarapas'] = $queryMetricas->where('dificuldade', '<>', 'Garapa')->count();
+        $metricas['naoGarapas'] = $queryMetricas->where('dificuldade', '<>', 'Garapa')->whereNotIn('situacao',['Não lançado', 'Não comprado'])->count();
+        $metricas['somenteGuia'] = $queryMetricas->where('guia1', '<>', '')->orwhere('guia2', '<>', '')->count();
 
         $plataformas = $this->plataformas;
         $publishers = $this->publishers;
@@ -142,6 +146,9 @@ class JogoController extends Controller{
         if(!empty($request->naoGarapas)){
             $queryJogos->where('dificuldade', '<>', 'Garapa');
         }
+        if(!empty($request->somenteGuia)){
+            $queryJogos->where('guia1', '<>', '')->orWhere('guia2', '<>', '');
+        }
         $jogos = $queryJogos->orderBy('titulo')->paginate(10);
         return view('restrita.jogo.index', compact(['jogos', 'plataformas', 'publishers', 'dificuldades', 'situacoes', 'metricas']));
     }
@@ -163,7 +170,11 @@ class JogoController extends Controller{
             $jogo->exclusivo = $request->exclusivo;
             $jogo->repetido = $request->repetido;
             $jogo->dificuldade = $request->dificuldade;
-            $jogo->situacao = $request->situacao;
+            if(!empty($request->platinado_em)){
+                $jogo->situacao = 'Platinado';
+            } else {
+                $jogo->situacao = $request->situacao;
+            }
             $jogo->platinado_em = $request->platinado_em;
             $jogo->guia1 = $request->guia1;
             $jogo->guia2 = $request->guia2;
@@ -171,57 +182,73 @@ class JogoController extends Controller{
                 $jogo->print = $this->uploadFoto($request->print);
             }
             $jogo->save();
-            //return redirect()->route('jogo.edit', $jogo)->with(['tipo'=>'success', 'titulo'=>'Sucesso!', 'mensagem'=>"Novo jogo inserido!"]);
-            return redirect()->route('jogo.create');
+            return redirect()->route('jogo.edit', $jogo)->with(['tipo'=>'success', 'titulo'=>'Sucesso!', 'mensagem'=>"Novo jogo inserido!"]);
+            //return redirect()->route('jogo.create');
         } catch (\Exception $e){
             return redirect()->back()->with(['tipo'=>'error', 'titulo'=>'Deu Ruim!', 'mensagem'=>$e->getMessage()])->withInput();
         }
     }
 
     public function edit(Jogo $jogo){
-        $plataformas = $this->plataformas;
-        $publishers = $this->publishers;
-        $dificuldades = $this->dificuldades;
-        $situacoes = $this->situacoes;
-        return view('restrita.jogo.dados', compact(['jogo','plataformas', 'publishers', 'dificuldades', 'situacoes']));
+        if($jogo->user_id <> Auth::user()->id){
+            return redirect()->back();
+        } else {
+            $plataformas = $this->plataformas;
+            $publishers = $this->publishers;
+            $dificuldades = $this->dificuldades;
+            $situacoes = $this->situacoes;
+            return view('restrita.jogo.dados', compact(['jogo','plataformas', 'publishers', 'dificuldades', 'situacoes']));
+        }
     }
 
     public function update(Request $request, Jogo $jogo){
-        try{
-            if($request->hasFile('print')){
-                File::delete(storage_path('app/public/jogos/') . $jogo->print);
-                $jogo->print = $this->uploadFoto($request->print);
+        if($jogo->user_id <> Auth::user()->id){
+            return redirect()->back();
+        } else {
+            try {
+                if ($request->hasFile('print')) {
+                    File::delete(storage_path('app/public/'.Auth::user()->id.'/prints/') . $jogo->print);
+                    $jogo->print = $this->uploadFoto($request->print);
+                }
+                $jogo->titulo = $request->titulo;
+                $jogo->plataforma = $request->plataforma;
+                $jogo->publisher = $request->publisher;
+                $jogo->exclusivo = $request->exclusivo;
+                $jogo->repetido = $request->repetido;
+                $jogo->dificuldade = $request->dificuldade;
+                if (!empty($request->platinado_em)) {
+                    $jogo->situacao = 'Platinado';
+                } else {
+                    $jogo->situacao = $request->situacao;
+                }
+                $jogo->platinado_em = $request->platinado_em;
+                $jogo->guia1 = $request->guia1;
+                $jogo->guia2 = $request->guia2;
+                $jogo->save();
+                DB::commit();
+                return redirect()->back()->with(['tipo' => 'success', 'titulo' => 'Sucesso!', 'mensagem' => "Jogo atualizado!"]);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with(['tipo' => 'error', 'titulo' => 'Deu Ruim!', 'mensagem' => $e->getMessage()])->withInput();
             }
-            $jogo->titulo = $request->titulo;
-            $jogo->plataforma = $request->plataforma;
-            $jogo->publisher = $request->publisher;
-            $jogo->exclusivo = $request->exclusivo;
-            $jogo->repetido = $request->repetido;
-            $jogo->dificuldade = $request->dificuldade;
-            $jogo->situacao = $request->situacao;
-            $jogo->platinado_em = $request->platinado_em;
-            $jogo->guia1 = $request->guia1;
-            $jogo->guia2 = $request->guia2;
-            $jogo->save();
-            DB::commit();
-            return redirect()->back()->with(['tipo'=>'success', 'titulo'=>'Sucesso!', 'mensagem'=>"Jogo atualizado!"]);
-        } catch (\Exception $e){
-            DB::rollBack();
-            return redirect()->back()->with(['tipo'=>'error', 'titulo'=>'Deu Ruim!', 'mensagem'=>$e->getMessage()])->withInput();
         }
     }
     public function delete(Jogo $jogo){
-        DB::beginTransaction();
-        try{
-            if(!empty($jogo->print)){
-                File::delete(storage_path('app/public/jogos/') . $jogo->print);
+        if($jogo->user_id <> Auth::user()->id){
+            return redirect()->back();
+        } else {
+            DB::beginTransaction();
+            try {
+                if (!empty($jogo->print)) {
+                    File::delete(storage_path('app/public/'.Auth::user()->id.'/prints/') . $jogo->print);
+                }
+                $jogo->delete();
+                DB::commit();
+                return redirect()->back()->with(['tipo' => 'success', 'titulo' => 'Sucesso', 'mensagem' => "Jogo apagado!"]);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with(['tipo' => 'error', 'mensagem' => $e->getMessage()]);
             }
-            $jogo->delete();
-            DB::commit();
-            return redirect()->back()->with(['tipo'=>'success', 'titulo'=>'Sucesso', 'mensagem'=>"Jogo apagado!"]);
-        } catch (\Exception $e){
-            DB::rollBack();
-            return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
         }
     }
     public function galeria(){
@@ -232,7 +259,7 @@ class JogoController extends Controller{
 
     public function nomeFoto($foto){
         $nome = uniqid(time()) . '.'. $foto->getClientOriginalExtension();
-        $dir = storage_path('app/public/jogos/');
+        $dir = storage_path('app/public/'.Auth::user()->id.'/prints/');
 
         if(file_exists($dir . $nome)){
             return $this->nomeFoto($foto);
@@ -241,10 +268,10 @@ class JogoController extends Controller{
     }
     protected function uploadFoto($foto){
         $nome  =  $this->nomeFoto($foto);
-        $caminho = storage_path('app/public/jogos/') . $nome;
+        $caminho = storage_path('app/public/'.Auth::user()->id.'/prints/') . $nome;
         Image::make($foto->getRealPath())->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($caminho, 45);
+        })->save($caminho, 60, 'jpg');
         return $nome;
     }
 }
