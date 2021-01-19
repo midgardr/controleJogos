@@ -161,12 +161,9 @@ function random_color() {
         Dashboard.Helpers.elementExists('.jogos-por-situacao', function() {
             $(this).highcharts({
                 chart: {
-                    type: 'bar',
-                    height: 300,
+                    type: 'column',
                     backgroundColor: 'transparent',
-                },
-                exporting: {
-                    enabled: false
+                    height: 300,
                 },
                 title: {
                     text: ''
@@ -180,45 +177,44 @@ function random_color() {
                             '{{$situacao->situacao}}',
                         @endforeach
                     ],
-                    title: {
-                        text: null
-                    }
+                    crosshair: true
                 },
                 yAxis: {
                     min: 0,
-                    tickInterval: 10,
                     title: {
-                        text: '',
-                        align: 'high'
-                    },
-                    labels: {
-                        overflow: 'justify'
+                        text: ''
                     }
                 },
-                tooltip: {
-                    valueSuffix: ''
-                },
-                plotOptions: {
-                    bar: {
-                        dataLabels: {
-                            enabled: false
-                        }
-                    }
+                credits: {
+                    enabled: false
                 },
                 legend: {
                     enabled: false
                 },
-                credits: {
+                exporting: {
                     enabled: false
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
                 },
                 series: [{
                     name: ' ',
                     data: [
                         @foreach($graficos['jogosPorSituacao'] as $situacao)
-                        {{$situacao->qtd}},
+                            {{$situacao->qtd}},
                         @endforeach
-                    ],
-                    borderColor: '#212121'
+                    ]
                 }]
             });
         });

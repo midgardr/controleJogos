@@ -28,7 +28,7 @@
         @endif
         <div class="col-xs-6 col-md-4">
             <div class="thumbnail no-bg b-a-2 b-gray-dark">
-                <img src="{{ asset('storage/'.Auth::user()->id.'/prints/'. $jogo->print) }}" alt="100%x200" data-holder-rendered="true" data-toggle="modal" data-target="#printModal" data-titulo="{{"{$jogo->titulo} - {$jogo->platinado_em}"}}" data-print="{{ asset('storage/'.Auth::user()->id.'/prints/'. $jogo->print) }}" data-descricao="{{ "Plataforma: {$jogo->plataforma} - Publicado por: {$jogo->publisher} - Dificuldade da platina: {$jogo->dificuldade}"}}">
+                <img src="{{ asset('storage/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" alt="100%x200" data-holder-rendered="true" data-toggle="modal" data-target="#printModal" data-titulo="{{"{$jogo->titulo} - {$jogo->platinado_em}"}}" data-print="{{ asset('storage/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" data-descricao="{{ "Plataforma: {$jogo->plataforma} - Publicado por: {$jogo->publisher} - Dificuldade da platina: {$jogo->dificuldade}"}}">
                 <div class="caption">
                     <h4><a href="{{route('jogo.edit', $jogo)}}">{{$jogo->titulo}}</a></h4>
                     <h5>Em {{$jogo->platinado_em}}</h5>

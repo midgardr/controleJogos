@@ -191,6 +191,7 @@
             };
             Dashboard.Helpers.elementExists('#daterangepicker-container', function() {
                 $('.date').daterangepicker({
+                    autoUpdateInput: false,
                     singleDatePicker: true,
                     showDropdowns: true,
                     locale: {
@@ -219,6 +220,8 @@
                             "Dezembro"
                         ],
                     },
+                }, function(chosen_date) {
+                    $('.date').val(chosen_date.format('DD/MM/YYYY'));
                 });
             });
         });

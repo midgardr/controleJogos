@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', [UserController::class, 'formLogin'])->name('formLogin');
 Route::post('/auth/login', [UserController::class, 'login'])->name('postLogin');
 Route::get('login', [UserController::class, 'notAuthorized'])->name('login');

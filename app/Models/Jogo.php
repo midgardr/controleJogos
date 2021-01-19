@@ -32,11 +32,15 @@ class Jogo extends Model
         return Carbon::parse($this->attributes['updated_at'])->format('d/m/Y H:i:s');
     }
     public function getPlatinadoEmAttribute(){
-        return Carbon::parse($this->attributes['platinado_em'])->format('d/m/Y');
+        if(!is_null($this->attributes['platinado_em'])){
+            return Carbon::parse($this->attributes['platinado_em'])->format('d/m/Y');
+        }
     }
     public function setPlatinadoEmAttribute($value){
-        if(!empty($value)){
+        if(!is_null($value)){
             $this->attributes['platinado_em'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->attributes['platinado_em'] = null;
         }
     }
 

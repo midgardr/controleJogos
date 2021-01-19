@@ -24,7 +24,7 @@
             <div class="col-md-4">
                 <div class="panel panel-default b-a-2 no-bg b-gray-dark">
                     <div class="panel-body">
-                        <img src="{{ asset('storage/'.Auth::user()->id.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block" data-toggle="modal" data-target="#printModal">
+                        <img src="{{ asset('storage/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block" data-toggle="modal" data-target="#printModal">
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                     <div id="daterangepicker-container">
-                                        <input type="text" class="form-control date" name="platinado_em" id="platinado_em" value="{{isset($jogo)?$jogo->platinado_em:old('platinado_em')}}">
+                                        <input type="text" class="form-control" name="platinado_em" id="platinado_em" value="{{isset($jogo)?$jogo->platinado_em:old('platinado_em')}}">
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                     <h4 class="modal-title" id="myModalLabel">{{"{$jogo->titulo} - {$jogo->platinado_em}"}}</h4>
                 </div>
                 <div class="modal-body">
-                    <img src="{{ asset('storage/'.Auth::user()->id.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block">
+                    <img src="{{ asset('storage/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block">
                     <h4 class="text-center">{!! "Plataforma: {$jogo->plataforma} - Publicado por: {$jogo->publisher} - Dificuldade da platina: {$jogo->dificuldade}"!!}</h4>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">FECHAR</button>

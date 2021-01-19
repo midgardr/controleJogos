@@ -24,7 +24,7 @@
                 <div class="panel-heading bg-primary-i">
                     <div class="media">
                         <div class="media-body">
-                            <span class="text-uppercsase">JOGOS ADQUIRIDOS</span>
+                            <span class="text-uppercsase">JOGOS</span>
                             <br>
                             <h1 class="display-4 m-t-0 m-b-0">{{$metricas['jogosAdquiridos']}}</h1>
                         </div>
@@ -168,7 +168,7 @@
     <div class="row">
         <div class="col-lg-4 m-t-2">
             <div class="panel panel-default no-bg b-a-2 b-gray-dark">
-                <div class="panel-heading">JOGOS POR PLATAFORMA</div>
+                <div class="panel-heading">PLATINAS POR PLATAFORMA</div>
                 <div class="panel-body">
                     <div class="jogos-por-plataforma"></div>
                 </div>
@@ -176,7 +176,7 @@
         </div>
         <div class="col-lg-4 m-t-2">
             <div class="panel panel-default no-bg b-a-2 b-gray-dark">
-                <div class="panel-heading">EXCLUSIVOS X MULT</div>
+                <div class="panel-heading">PLATINAS (EXCLUSIVOS X MULT)</div>
                 <div class="panel-body">
                     <div class="exclusivos-mults"></div>
                 </div>
@@ -184,7 +184,7 @@
         </div>
         <div class="col-lg-4 m-t-2">
             <div class="panel panel-default no-bg b-a-2 b-gray-dark">
-                <div class="panel-heading">ÚNCIOS X REPETIDOS</div>
+                <div class="panel-heading">PLATINAS (ÚNCIOS X REPETIDOS)</div>
                 <div class="panel-body">
                     <div class="unicos-repetidos"></div>
                 </div>
@@ -204,7 +204,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default no-bg b-a-2 b-gray-dark">
-                <div class="panel-heading">JOGOS POR DIFICULDADE</div>
+                <div class="panel-heading">PLATINAS POR DIFICULDADE</div>
                 <div class="panel-body">
                     <div class="jogos-por-dificuldade"></div>
                 </div>
@@ -214,7 +214,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default no-bg b-a-2 b-gray-dark">
-                <div class="panel-heading">JOGOS POR PUBLISHER (AS 10 MELHORES)</div>
+                <div class="panel-heading">PLATINAS POR PUBLISHER (AS 10 MELHORES)</div>
                 <div class="panel-body">
                     <div class="jogos-por-publisher"></div>
                 </div>

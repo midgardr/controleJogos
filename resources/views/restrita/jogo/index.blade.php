@@ -131,7 +131,7 @@
                             <h5 class="m-b-0"><span>{{$jogo->repetido==1?'Sim':'Não'}}</span></h5>
                         </td>
                         <td class="v-a-m text-center">
-                            <h5 class="m-b-0"><span>{{!empty($jogo->platinado_em)?$jogo->platinado_em:'Não platinado ainda :('}}</span></h5>
+                            <h5 class="m-b-0"><span>{{!is_null($jogo->platinado_em)?$jogo->platinado_em:'Não platinado ainda :('}}</span></h5>
                         </td>
                         <td class="text-right v-a-m">
                             <div class="dropdown">

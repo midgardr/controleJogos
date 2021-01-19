@@ -6,11 +6,16 @@
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Jogo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Jogo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/restrita/graficos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/graficos.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/galeria.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/galeria.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +209,7 @@
       <workItem from="1610810157637" duration="12114000" />
       <workItem from="1610828449080" duration="11423000" />
       <workItem from="1610893203191" duration="1587000" />
-      <workItem from="1610980924977" duration="6384000" />
+      <workItem from="1610980924977" duration="14554000" />
     </task>
     <servers />
   </component>

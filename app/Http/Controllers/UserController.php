@@ -51,12 +51,13 @@ class UserController extends Controller{
         } else {
             $user = $this->user;
             try{
+                $user->uuid = md5(uniqid(rand(), true));
                 $user->name = $request->name;
                 $user->email = trim($request->email);
                 $user->psn_id = trim($request->psn_id);
                 $user->password = bcrypt('platinador');
                 $user->save();
-                $dir = storage_path('app/public/'.$user->id.'/prints/');
+                $dir = storage_path('app/public/'.$user->uuid.'/prints/');
                 if(!File::isDirectory($dir)){
                     File::makeDirectory($dir, 0777, true, true);
                 }
