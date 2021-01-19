@@ -17,49 +17,7 @@ class JogoController extends Controller{
         'PSVita',
         'PS5'
     ];
-    private $publishers = [
-        'Activision Blizzard',
-        '505 Games',
-        'Aksys Games',
-        'Apple',
-        'Atlus',
-        'Bandai Namco',
-        'Bethesda Softworks',
-        'Capcom',
-        'Deep Silver',
-        'Devolver Digital',
-        'Disney Interactive Studios',
-        'EA',
-        'Ember Lab',
-        'Envolved Games',
-        'Focus Home Interactive',
-        'Frozenbyte',
-        'Gammera Nest',
-        'Google',
-        'Koei Tecmo',
-        'Konami',
-        'Lucas Arts',
-        'Microsoft',
-        'NetEase',
-        'Nintendo',
-        'NIS America',
-        'Paradox Interactive',
-        'Rain Games',
-        'Sega',
-        'Slitherine Strategies',
-        'Square-Enix',
-        'Sony',
-        'Studio MDHR',
-        'Take-Two',
-        'Team Cherry',
-        'Telltale Games',
-        'Tencent Games',
-        'THQ',
-        'Ubisoft',
-        'Warner Bros.',
-        'Zen Studios',
-        'Outra'
-    ];
+    private $publishers = ['2Awesome','2Dream','505 Games','70 Times 7, LLC','A Crowd of Monsters','Activision Blizzard','Aksys Games','Apple','Aquiris Game Studio','Aria','Artifex Mundi','Atlus','Bandai Namco','Bethesda Softworks','Billy Goat Entertainment','Blowfish Studios','Capcom','Chubby Pixel','Circle Entertainment','Cococucumber','Coffee Stain Studios','Cooply Solutions','Crazy Monkey Studios','Creative Bytes Studios','Curve Digital','Daedalic Entertainment','Deep Silver','Devolver Digital','Digital Touch Co','Disney Interactive Studios','Double Eleven','Double Fine','Dramaticcreate','EA','EastAsiaSoft','Ember Lab','Endemol Uk Limited','Entergram','Envolved Games','Fair Play Labs','Focus Home Interactive','Frozenbyte','Fullbright','Funbox Media','Gamemill Entertainment','Gammera Nest','Gearbox','Gnomic Studios','Google','Granzella','Green Lava Studios','Groovy Milk','Ground Shatter','Harukaze','Hunex','Infinite Madaa','Intragames','Ivanovich Games','JP: Idea Factory','Kalypso Media Digital','Kingdom Media','Koei Tecmo','Konami','Level 77 Pty','Lightwood Games','Lillymo Games','Lucas Arts','Merge Games Limited','MichaelArts','Microsoft','Mighty Rabbit Studios','NIS America','National Westminster Bank','Necrophone Games','NetEase','NiKo MaKi','Nintendo','Nippon Ichi Software','Oasis Games','Otterrific Games','Outra','Owlgorithm','PQube','Paradox Interactive','Phosphor Games','Pixel Maniacs','Playrise Digital','Product ID','Prototype','Psyonix','Radial Games','Rain Games','Rainy Night Creations','Ratalaika Games','Rockin Heart Games','SakuraGame','Sega','Shanghai Kena','Slang','Slitherine Strategies','Smobile','Soedesco','Sometimes You','Sony','Spike Chunsoft','Sprite','Square-Enix','Studio MDHR','THQ','Take-Two','Team Cherry','Telltale Games','Tencent Games','Top Rated','Ubisoft','Unfinished Pixel','VRWERX','Vector Unit','Victory Road','Vision Games','Wales Interactive','Warner Bros.','Wired Productions','X.D. Network Inc','Zen Studios','Zodiac Interactive'];
     private $dificuldades = [
         'Garapa',
         'Fácil',
@@ -278,5 +236,9 @@ class JogoController extends Controller{
             $constraint->aspectRatio();
         })->save($caminho, 60, 'jpg');
         return $nome;
+    }
+
+    public function listPublishers(){
+        return count($this->publishers);
     }
 }

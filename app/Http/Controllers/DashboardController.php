@@ -31,7 +31,7 @@ class DashboardController extends Controller
 
         $graficos = [];
         $graficos['jogosPorPlataformas'] = DB::table('jogos')->selectRaw('plataforma, COUNT(*) AS qtd')->where('situacao', 'Platinado')->groupBy('plataforma')->orderBy('qtd', 'DESC')->get();
-        $graficos['jogosPorPublishers'] = DB::table('jogos')->selectRaw('publisher, COUNT(*) AS qtd')->where('situacao', 'Platinado')->groupBy('publisher')->where('publisher', '<>', 'Outra')->orderBy('qtd', 'DESC')->limit(10)->get();
+        $graficos['jogosPorPublishers'] = DB::table('jogos')->selectRaw('publisher, COUNT(*) AS qtd')->where('situacao', 'Platinado')->groupBy('publisher')->where('publisher', '<>', 'Outra')->orderBy('qtd', 'DESC')->limit(12)->get();
         $graficos['jogosExclusivos'] = DB::table('jogos')->selectRaw('(CASE WHEN exclusivo = 1 THEN "EXCLUSIVO" ELSE "MULTIPLATAFORMA" END) AS exclusividade, COUNT(*) AS qtd')->where('situacao', 'Platinado')->groupBy('exclusividade')->orderBy('qtd', 'DESC')->get();
         $graficos['jogosPorDificuldade'] = DB::table('jogos')->selectRaw('dificuldade, COUNT(*) AS qtd')->where('situacao', 'Platinado')->groupBy('dificuldade')->orderBy('qtd', 'DESC')->get();
         $graficos['jogosUnicos'] = DB::table('jogos')->selectRaw('(CASE WHEN repetido = 1 THEN "REPETIPO" ELSE "ÚNICO" END) AS unicidade, COUNT(*) AS qtd')->where('situacao', 'Platinado')->groupBy('unicidade')->orderBy('qtd', 'DESC')->get();
