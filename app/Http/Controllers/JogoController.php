@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Jogo;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 
 class JogoController extends Controller{
-    protected $jogo;
+    private $jogo;
     private $plataformas = [
         'PS3',
         'PS4',
@@ -42,19 +43,19 @@ class JogoController extends Controller{
     public function index(Request $request){
         $queryMetricas = $this->jogo;
         $metricas = [];
-        $metricas['todosJogos'] = $queryMetricas->all()->count();
-        $metricas['jogando'] = $queryMetricas->where('situacao', 'Jogando')->count();
-        $metricas['exclusivos'] = $queryMetricas->where('exclusivo', 1)->count();
-        $metricas['multiplataformas'] = $queryMetricas->where('exclusivo', 0)->count();
-        $metricas['naoPlatinados'] = $queryMetricas->where('situacao', '<>', 'Platinado')->count();
-        $metricas['platinados'] = $queryMetricas->where('situacao', 'Platinado')->count();
-        $metricas['ineditos'] = $queryMetricas->where('repetido', 0)->count();
-        $metricas['repetidos'] = $queryMetricas->where('repetido', 1)->count();
-        $metricas['naoLancados'] = $queryMetricas->where('situacao', 'Não lançado')->count();
-        $metricas['naoComprados'] = $queryMetricas->where('situacao', 'Não comprado')->count();
-        $metricas['desistidos'] = $queryMetricas->where('situacao', 'Desistido')->count();
-        $metricas['naoGarapas'] = $queryMetricas->where('dificuldade', '<>', 'Garapa')->count();
-        $metricas['somenteGuia'] = $queryMetricas->where('guia1', '<>', '')->orwhere('guia2', '<>', '')->count();
+        $metricas['todosJogos'] = $queryMetricas->where('user_id', Auth::user()->id)->count();
+        $metricas['jogando'] = $queryMetricas->where('user_id', Auth::user()->id)->where('situacao', 'Jogando')->count();
+        $metricas['exclusivos'] = $queryMetricas->where('user_id', Auth::user()->id)->where('exclusivo', 1)->count();
+        $metricas['multiplataformas'] = $queryMetricas->where('user_id', Auth::user()->id)->where('exclusivo', 0)->count();
+        $metricas['naoPlatinados'] = $queryMetricas->where('user_id', Auth::user()->id)->where('situacao', '<>', 'Platinado')->count();
+        $metricas['platinados'] = $queryMetricas->where('user_id', Auth::user()->id)->where('situacao', 'Platinado')->count();
+        $metricas['ineditos'] = $queryMetricas->where('user_id', Auth::user()->id)->where('repetido', 0)->count();
+        $metricas['repetidos'] = $queryMetricas->where('user_id', Auth::user()->id)->where('repetido', 1)->count();
+        $metricas['naoLancados'] = $queryMetricas->where('user_id', Auth::user()->id)->where('situacao', 'Não lançado')->count();
+        $metricas['naoComprados'] = $queryMetricas->where('user_id', Auth::user()->id)->where('situacao', 'Não comprado')->count();
+        $metricas['desistidos'] = $queryMetricas->where('user_id', Auth::user()->id)->where('situacao', 'Desistido')->count();
+        $metricas['naoGarapas'] = $queryMetricas->where('user_id', Auth::user()->id)->where('dificuldade', '<>', 'Garapa')->count();
+        $metricas['somenteGuia'] = $queryMetricas->where('user_id', Auth::user()->id)->where('guia1', '<>', '')->count();
 
         $plataformas = $this->plataformas;
         $publishers = $this->publishers;
@@ -109,7 +110,7 @@ class JogoController extends Controller{
             $queryJogos->where('dificuldade', '<>', 'Garapa');
         }
         if(!empty($request->somenteGuia)){
-            $queryJogos->where('guia1', '<>', '')->orWhere('guia2', '<>', '');
+            $queryJogos->where('guia1', '<>', '');
         }
         $jogos = $queryJogos->orderBy('titulo')->paginate(10);
         return view('restrita.jogo.index', compact(['jogos', 'plataformas', 'publishers', 'dificuldades', 'situacoes', 'metricas']));
@@ -152,7 +153,7 @@ class JogoController extends Controller{
     }
 
     public function edit(Jogo $jogo){
-        if($jogo->user_id <> Auth::user()->id){
+        if($jogo->user_id != Auth::user()->id){
             return redirect()->back();
         } else {
             $plataformas = $this->plataformas;
@@ -164,7 +165,7 @@ class JogoController extends Controller{
     }
 
     public function update(Request $request, Jogo $jogo){
-        if($jogo->user_id <> Auth::user()->id){
+        if($jogo->user_id != Auth::user()->id){
             return redirect()->back();
         } else {
             try {
@@ -197,7 +198,7 @@ class JogoController extends Controller{
         }
     }
     public function delete(Jogo $jogo){
-        if($jogo->user_id <> Auth::user()->id){
+        if($jogo->user_id != Auth::user()->id){
             return redirect()->back();
         } else {
             DB::beginTransaction();
@@ -215,7 +216,8 @@ class JogoController extends Controller{
         }
     }
     public function galeria(){
-        $galeria = $this->jogo->whereNotNull('print')->orderBy('id', 'ASC')->paginate(21);
+        $this->user = User::find(Auth::user()->id);
+        $galeria = $this->jogo->where('user_id', Auth::user()->id)->whereNotNull('print')->orderBy('id', 'ASC')->paginate(21);
         return view('restrita.jogo.galeria', compact('galeria'));
     }
 

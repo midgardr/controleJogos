@@ -19,7 +19,7 @@ class UserController extends Controller{
     }
 
     public function login(Request $request){
-        if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password], $request->remember)){
+        if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
             if(Auth::user()->verificado == 1){
                 return redirect()->route('dashboard')->with(['tipo'=>'success', 'titulo'=>'Seja bem vindo!', 'mensagem'=>'Aproveite todos os recursos do sistema :)']);;
             } else {
@@ -55,7 +55,7 @@ class UserController extends Controller{
                 $user->name = $request->name;
                 $user->email = trim($request->email);
                 $user->psn_id = trim($request->psn_id);
-                $user->password = bcrypt('platinador');
+                $user->password = bcrypt($request->password);
                 $user->save();
                 $dir = storage_path('app/public/'.$user->uuid.'/prints/');
                 if(!File::isDirectory($dir)){
