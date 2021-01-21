@@ -179,7 +179,7 @@
                     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                     var modal = $(this)
                     modal.find('#mensagem').html(mensagem);
-                    modal.find('#btnJogoDelete').attr('href', 'http://laravel.run/restrita/jogo/'+jogoId+'/delete');
+                    modal.find('#btnJogoDelete').attr('href', 'http://controledeplatina.com.br/restrita/jogo/'+jogoId+'/delete');
                 })
             @endif
             window.onload = function() {

@@ -57,7 +57,7 @@ class UserController extends Controller{
                 $user->psn_id = trim($request->psn_id);
                 $user->password = bcrypt($request->password);
                 $user->save();
-                $dir = public_path('uploads/'.$user->uuid.'/prints/');
+                $dir = 'uploads/'.$user->uuid.'/prints/';
                 if(!File::isDirectory($dir)){
                     File::makeDirectory($dir, 0777, true, true);
                 }
@@ -99,7 +99,7 @@ class UserController extends Controller{
         try{
             $nome = $user->name;
             $user->delete();
-            File::deleteDirectory(public_path('uploads/'.$user->uuid));
+            File::deleteDirectory('uploads/'.$user->uuid);
             DB::commit();
             return redirect()->route('inicio')->with(['tipo'=>'success', 'mensagem'=>"Usuário {$nome} excluído com sucesso!"]);
         } catch (\Exception $e){

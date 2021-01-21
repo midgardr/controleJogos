@@ -454,7 +454,6 @@ function random_color() {
                         text: ''
                     },
                     plotLines: [{
-                        value: ,
                         width: 1,
                         color: '#808080'
                     }]
