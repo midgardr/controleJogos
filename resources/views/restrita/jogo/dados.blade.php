@@ -24,7 +24,7 @@
             <div class="col-md-4">
                 <div class="panel panel-default b-a-2 no-bg b-gray-dark">
                     <div class="panel-body">
-                        <img src="{{ asset('storage/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block" data-toggle="modal" data-target="#printModal">
+                        <img src="{{ asset('uploads/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block" data-toggle="modal" data-target="#printModal">
                     </div>
                 </div>
             </div>
@@ -140,6 +140,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="observacoes" class="control-label">Observações</label>
+                            <textarea name="observacoes" id="observacoes" class="form-control" rows="3">{{isset($jogo)?$jogo->observacoes:old('observacoes')}}</textarea>
+                        </div>
                         <button class="btn m-b-2 btn-primary"><i class="fa fa-save"></i> SALVAR</button>
                         <a href="{{route('jogo.create')}}" class="btn m-b-2 btn-success"><i class="fa fa-plus"></i> NOVO</a>
                         <a href="{{route('jogo.index')}}" class="btn m-b-2 btn-minsk"><i class="fa fa-arrow-circle-left"></i> VOLTAR</a>
@@ -158,7 +162,7 @@
                     <h4 class="modal-title" id="myModalLabel">{{"{$jogo->titulo} - {$jogo->platinado_em}"}}</h4>
                 </div>
                 <div class="modal-body">
-                    <img src="{{ asset('storage/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block">
+                    <img src="{{ asset('uploads/'.Auth::user()->uuid.'/prints/'. $jogo->print) }}" class="img-rounded m-r-1 img-responsive center-block">
                     <h4 class="text-center">{!! "Plataforma: {$jogo->plataforma} - Publicado por: {$jogo->publisher} - Dificuldade da platina: {$jogo->dificuldade}"!!}</h4>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">FECHAR</button>

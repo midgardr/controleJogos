@@ -22,7 +22,8 @@ class Jogo extends Model
         'platinado_em',
         'guia1',
         'guia2',
-        'print'
+        'print',
+        'observacoes'
     ];
 
     public function getCreatedAtAttribute(){

@@ -145,6 +145,7 @@ class JogoController extends Controller{
             if($request->hasFile('print')){
                 $jogo->print = $this->uploadFoto($request->print);
             }
+            $jogo->observacoes = $request->observacoes;
             $jogo->save();
             return redirect()->route('jogo.edit', $jogo)->with(['tipo'=>'success', 'titulo'=>'Sucesso!', 'mensagem'=>"Novo jogo inserido!"]);
         } catch (\Exception $e){
@@ -170,7 +171,7 @@ class JogoController extends Controller{
         } else {
             try {
                 if ($request->hasFile('print')) {
-                    File::delete(storage_path('app/public/'.Auth::user()->uuid.'/prints/') . $jogo->print);
+                    File::delete(public_path('uploads/'.Auth::user()->uuid.'/prints/') . $jogo->print);
                     $jogo->print = $this->uploadFoto($request->print);
                 }
                 $jogo->titulo = $request->titulo;
@@ -188,6 +189,7 @@ class JogoController extends Controller{
                 }
                 $jogo->guia1 = $request->guia1;
                 $jogo->guia2 = $request->guia2;
+                $jogo->observacoes = $request->observacoes;
                 $jogo->save();
                 DB::commit();
                 return redirect()->back()->with(['tipo' => 'success', 'titulo' => 'Sucesso!', 'mensagem' => "Jogo atualizado!"]);
@@ -204,7 +206,7 @@ class JogoController extends Controller{
             DB::beginTransaction();
             try {
                 if (!empty($jogo->print)) {
-                    File::delete(storage_path('app/public/'.Auth::user()->uuid.'/prints/') . $jogo->print);
+                    File::delete(public_path('uploads/'.Auth::user()->uuid.'/prints/') . $jogo->print);
                 }
                 $jogo->delete();
                 DB::commit();
@@ -224,7 +226,7 @@ class JogoController extends Controller{
 
     public function nomeFoto($foto){
         $nome = uniqid(time()) . '.'. $foto->getClientOriginalExtension();
-        $dir = storage_path('app/public/'.Auth::user()->uuid.'/prints/');
+        $dir = public_path('upload/'.Auth::user()->uuid.'/prints/');
 
         if(file_exists($dir . $nome)){
             return $this->nomeFoto($foto);
@@ -233,7 +235,7 @@ class JogoController extends Controller{
     }
     protected function uploadFoto($foto){
         $nome  =  $this->nomeFoto($foto);
-        $caminho = storage_path('app/public/'.Auth::user()->uuid.'/prints/') . $nome;
+        $caminho = public_path('uploads/'.Auth::user()->uuid.'/prints/') . $nome;
         Image::make($foto->getRealPath())->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
         })->save($caminho, 60, 'jpg');
