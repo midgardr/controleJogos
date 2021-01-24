@@ -21,6 +21,8 @@ Route::get('login', [UserController::class, 'notAuthorized'])->name('login');
 Route::get('/cadastro', [UserController::class, 'create'])->name('usuario.cadastro');
 Route::post('/cadastro', [UserController::class, 'store'])->name('usuario.store');
 Route::get('/confirmacao/{uuid}', [UserController::class, 'confirmacao'])->name('usuario.confirmacao');
+Route::get('/esqueci/senha', [UserController::class, 'esqueciSenha1'])->name('usuario.esqueciSenha1');
+Route::post('/esqueci/senha', [UserController::class, 'esqueciSenha2'])->name('usuario.esqueciSenha2');
 
 Route::middleware('auth')->group(function(){
     Route::get('/auth/logout', [UserController::class, 'logout'])->name('logout');

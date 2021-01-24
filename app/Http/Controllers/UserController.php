@@ -64,7 +64,7 @@ class UserController extends Controller{
                     File::makeDirectory($dir, 0777, true, true);
                 }
                 //return new Email($user, 'Controle de Platina - E-mail de confirmação');
-                Mail::send(new Email($user, 'Controle de Platina - E-mail de confirmação'));
+                Mail::send(new Email($user, 'Controle de Platina - E-mail de confirmação', 'verificacao', null));
                 return redirect()->route('formLogin')->with(['tipo'=>'success', 'Obrigado!', 'mensagem'=>"Seu cadastro foi realizado com sucesso! Verifique o seu e-mail para ativar o seu cadastro!"]);
             } catch (\Exception $e){
                 //dd($e->getMessage());
@@ -121,6 +121,23 @@ class UserController extends Controller{
             return redirect()->route('formLogin')->with(['tipo'=>'success', 'titulo'=>'Confirmação', 'mensagem'=>'Parabéns, seu cadastro foi verificado com sucesso! Pode logar e desfrutar do catálogo!']);
         } else {
             return redirect()->route('formLogin')->with(['tipo'=>'error', 'titulo'=>'Confirmação', 'mensagem'=>'Não foi possível verificar o seu cadastro!']);
+        }
+    }
+
+    public function esqueciSenha1(){
+        return view('esqueciSenha');
+    }
+    public function esqueciSenha2(Request $request){
+        $user = $this->user->where(['psn_id'=>$request->psn_id, 'email'=>$request->email])->first();
+        if(!empty($user)){
+            $novaSenha = substr(md5(uniqid(rand(), true)),0,8);
+            $user->password = bcrypt($novaSenha);
+            $user->save();
+            //return new Email($user, 'Controle de Platina - Recuperação de senha', 'recuperacao', $novaSenha);
+            Mail::send(new Email($user, 'Controle de Platina - Recuperação de senha', 'recuperacao', $novaSenha));
+            return redirect()->route('formLogin')->with(['tipo'=>'success', 'titulo'=>'Recuperação de senha', 'mensagem'=>'Lhe enviamos um e-mail com a nova senha!']);
+        } else {
+            return redirect()->back()->with(['tipo'=>'error', 'titulo'=>'Recuperação de senha', 'mensagem'=>'Não foi possível localizar o seu cadastro!']);
         }
     }
 }

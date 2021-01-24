@@ -13,15 +13,19 @@ class Email extends Mailable{
     use Queueable, SerializesModels;
     private $user;
     private $assunto;
+    private $tipoEmail;
+    private $senhaRecuperacao;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, String $assunto){
+    public function __construct(User $user, String $assunto, String $tipoEmail, String $senhaRecuperacao = null ){
         $this->user = $user;
         $this->assunto = $assunto;
+        $this->tipoEmail = $tipoEmail;
+        $this->senhaRecuperacao = $senhaRecuperacao;
     }
 
     /**
@@ -33,6 +37,10 @@ class Email extends Mailable{
         $this->subject($this->assunto);
         $this->to($this->user->email, $this->user->name);
         $this->from('envioscontroldedeplatina@gmail.com', 'Controle de Platina');
-        return $this->markdown('Email.confirmacao', ['user'=>$this->user]);
+        if($this->tipoEmail == 'verificacao'){
+            return $this->markdown('Email.confirmacao', ['user'=>$this->user]);
+        } else {
+            return $this->markdown('Email.recuperacaoSenha', ['user'=>$this->user, 'senha'=>$this->senhaRecuperacao]);
+        }
     }
 }

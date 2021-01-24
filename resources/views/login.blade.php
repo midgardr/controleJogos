@@ -20,7 +20,7 @@
                     </form>
                 </div>
                 <div class="panel-footer b-a-0 b-r-a-0">
-                    <a href="#">Esqueci minha senha!</a>
+                    <a href="{{route('usuario.esqueciSenha1')}}">Esqueci minha senha!</a>
                     <a href="{{route('usuario.cadastro')}}" class="pull-right">Novo aqui? Cadastre-se!</a>
                 </div>
             </div>
