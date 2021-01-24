@@ -111,8 +111,8 @@
     </div>
     <!-- START Footer -->
     <p style="margin-left: 10px; padding-top: 10px;">
-        <strong class="m-r-1">CONTROLDE PLATINA - CATÁLOGO DE JOGOS</strong>
-        <span>&#xA9; {{date('Y')}}. By FUBICA SOLUTIONS</span>
+        <strong class="m-r-1">CATÁLOGO DE JOGOS</strong>
+        <span>&#xA9; {{date('Y')}}. By CONTROLE DE PLATINA</span>
     </p>
     <!-- END Footer -->
 </div>
@@ -133,7 +133,7 @@
             }
         });
         $(document).ready(function() {
-            @if (session()->has('mensagem'))
+            @if (session('mensagem'))
                 function notificacao() {
                     toastr["{{ session("tipo") }}"]("{{ session("mensagem") }}", "{{ session("titulo") }}")
                     toastr.options = {

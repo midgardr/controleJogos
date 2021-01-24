@@ -84,7 +84,7 @@
         });
     })();
     $(document).ready(function() {
-        @if (session()->has('mensagem'))
+        @if (session('mensagem'))
         function notificacao() {
             toastr["{{ session("tipo") }}"]("{{ session("mensagem") }}", "{{ session("titulo") }}")
             toastr.options = {

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Email;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller{
     protected $user;
@@ -61,8 +63,11 @@ class UserController extends Controller{
                 if(!File::isDirectory($dir)){
                     File::makeDirectory($dir, 0777, true, true);
                 }
+                //return new Email($user, 'Controle de Platina - E-mail de confirmação');
+                Mail::send(new Email($user, 'Controle de Platina - E-mail de confirmação'));
                 return redirect()->route('formLogin')->with(['tipo'=>'success', 'Obrigado!', 'mensagem'=>"Seu cadastro foi realizado com sucesso! Verifique o seu e-mail para ativar o seu cadastro!"]);
             } catch (\Exception $e){
+                //dd($e->getMessage());
                 return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
             }
         }
@@ -101,10 +106,21 @@ class UserController extends Controller{
             $user->delete();
             File::deleteDirectory('uploads/'.$user->uuid);
             DB::commit();
-            return redirect()->route('inicio')->with(['tipo'=>'success', 'mensagem'=>"Usuário {$nome} excluído com sucesso!"]);
+            return redirect()->route('inicio')->with(['tipo'=>'success', 'titulo'=>'Parabéns', 'mensagem'=>"Usuário {$nome} excluído com sucesso!"]);
         } catch (\Exception $e){
             DB::rollBack();
             return redirect()->back()->with(['tipo'=>'error', 'mensagem'=>$e->getMessage()]);
+        }
+    }
+
+    public function confirmacao(String $uuid){
+        $user = $this->user->where('uuid', $uuid)->first();
+        if(!empty($user)){
+            $user->verificado = 1;
+            $user->save();
+            return redirect()->route('formLogin')->with(['tipo'=>'success', 'titulo'=>'Confirmação', 'mensagem'=>'Parabéns, seu cadastro foi verificado com sucesso! Pode logar e desfrutar do catálogo!']);
+        } else {
+            return redirect()->route('formLogin')->with(['tipo'=>'error', 'titulo'=>'Confirmação', 'mensagem'=>'Não foi possível verificar o seu cadastro!']);
         }
     }
 }

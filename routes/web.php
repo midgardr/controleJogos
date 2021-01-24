@@ -20,6 +20,7 @@ Route::post('/auth/login', [UserController::class, 'login'])->name('postLogin');
 Route::get('login', [UserController::class, 'notAuthorized'])->name('login');
 Route::get('/cadastro', [UserController::class, 'create'])->name('usuario.cadastro');
 Route::post('/cadastro', [UserController::class, 'store'])->name('usuario.store');
+Route::get('/confirmacao/{uuid}', [UserController::class, 'confirmacao'])->name('usuario.confirmacao');
 
 Route::middleware('auth')->group(function(){
     Route::get('/auth/logout', [UserController::class, 'logout'])->name('logout');

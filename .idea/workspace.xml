@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fdc9378e-c5b2-40f5-b115-b869ce10d0e4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/Email/confirmacao.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/restrita/graficos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/graficos.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cadastro.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cadastro.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/template.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +213,13 @@
       <workItem from="1611068139340" duration="10481000" />
       <workItem from="1611156707696" duration="1704000" />
       <workItem from="1611169301435" duration="1180000" />
-      <workItem from="1611248964951" duration="4567000" />
+      <workItem from="1611248964951" duration="4830000" />
+      <workItem from="1611263113646" duration="534000" />
+      <workItem from="1611278627706" duration="1022000" />
+      <workItem from="1611332530391" duration="2392000" />
+      <workItem from="1611348821181" duration="2892000" />
+      <workItem from="1611363698594" duration="26000" />
+      <workItem from="1611487231451" duration="3785000" />
     </task>
     <servers />
   </component>

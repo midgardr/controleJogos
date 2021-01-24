@@ -45,7 +45,7 @@
             </div>
             <p class="text-center">
                 <strong class="m-r-1">CATÁLOGO DE JOGOS</strong>
-                <span>&#xA9; {{date('Y')}}. By FUBICA SOLUTIONS</span>
+                <span>&#xA9; {{date('Y')}}. By CONTROLE DE PLATINA</span>
             </p>
         </div>
     </div>
