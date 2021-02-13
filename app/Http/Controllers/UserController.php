@@ -22,10 +22,14 @@ class UserController extends Controller{
 
     public function login(Request $request){
         if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
-            if(Auth::user()->verificado == 1){
-                return redirect()->route('dashboard')->with(['tipo'=>'success', 'titulo'=>'Seja bem vindo!', 'mensagem'=>'Aproveite todos os recursos do sistema :)']);;
+            if(Auth::user()->super == 1){
+                return redirect()->route('video.index')->with(['tipo'=>'success', 'titulo'=>'Seja bem vindo!', 'mensagem'=>'Aproveite todos os recursos do sistema :)']);;
             } else {
-                return redirect()->back()->with(['tipo'=>'warning', 'titulo'=>'Atenção!', 'mensagem'=>'Seu e-mail não foi verificado ainda!']);
+                if(Auth::user()->verificado == 1){
+                    return redirect()->route('dashboard')->with(['tipo'=>'success', 'titulo'=>'Seja bem vindo!', 'mensagem'=>'Aproveite todos os recursos do sistema :)']);;
+                } else {
+                    return redirect()->back()->with(['tipo'=>'warning', 'titulo'=>'Atenção!', 'mensagem'=>'Seu e-mail não foi verificado ainda!']);
+                }
             }
         }
         return redirect()->back()->with(['tipo'=>'warning', 'titulo'=>'Atenção!', 'mensagem'=>'E-mail e/ou senha inválido(s).']);
@@ -37,10 +41,6 @@ class UserController extends Controller{
     }
     public function notAuthorized(){
         return redirect()->route('formLogin')->with(['tipo'=>'error', 'titulo'=>'Opa!', 'mensagem'=>'Tá tentando entrar no sitema sem logar!']);
-    }
-
-    public function index(Request $request){
-
     }
 
     public function create(){

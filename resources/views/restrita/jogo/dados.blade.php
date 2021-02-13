@@ -39,7 +39,7 @@
                             @method('PUT')
                         @endif
                         <div class="form-group">
-                            <label for="name">Título</label>
+                            <label for="titulo">Título</label>
                             <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título do jogo" value="{{isset($jogo)?$jogo->titulo:old('titulo')}}" required autofocus>
                         </div>
                         <div class="row">

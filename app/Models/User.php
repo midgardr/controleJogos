@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'psn_id',
         'password',
+        'verificado',
+        'super'
     ];
 
     /**
