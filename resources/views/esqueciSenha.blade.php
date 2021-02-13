@@ -21,10 +21,13 @@
                         <button class="btn m-b-2 btn-primary"><i class="fa fa-save"></i> ENVIAR</button>
                     </form>
                 </div>
+                <div class="panel-footer b-a-0 b-r-a-0">
+                    <a href="{{route('usuario.cadastro')}}">Novo aqui? Cadastre-se!</a>
+                    <a href="{{route('formLogin')}}" class="pull-right">Voltar para a tela de login!</a>
+                </div>
             </div>
             <p class="text-center">
-                <strong class="m-r-1">CATÁLOGO DE JOGOS</strong>
-                <span>&#xA9; {{date('Y')}}. By CONTROLE DE PLATINA</span>
+                <span>&#xA9; {{date('Y')}}. By <a href="https://www.youtube.com/channel/UC8HrnYy-RaLof9VyYgTjMgg" target="_blank"><i class="fa fa-youtube"></i> CONTROLE DE PLATINA</a></span>
             </p>
         </div>
     </div>

@@ -6,7 +6,7 @@
     <!-- Enable responsiveness on mobile devices-->
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>
-        CONTROLE DE PLATINA | CATÁLOGO DE JOGOS
+        CONTROLE DE PLATINA
     </title>
     <!--START Loader -->
     <style>

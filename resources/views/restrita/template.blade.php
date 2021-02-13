@@ -6,7 +6,7 @@
     <!-- Enable responsiveness on mobile devices-->
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>
-        CONTROLE DE PLATINA | CATÁLOGO
+        CONTROLE DE PLATINA
     </title>
     <!--START Loader -->
     <style>
@@ -78,7 +78,7 @@
                         <li>
                             <a href="{{route('logout')}}" role="button">
                                 <span class="m-r-1">SAIR</span>
-                                <i class="fa fa-times"></i>
+                                <i class="fa fa-sign-out"></i>
                             </a>
                         </li>
                     </ul>
@@ -111,8 +111,7 @@
     </div>
     <!-- START Footer -->
     <p style="margin-left: 10px; padding-top: 10px;">
-        <strong class="m-r-1">CATÁLOGO DE JOGOS</strong>
-        <span>&#xA9; {{date('Y')}}. By CONTROLE DE PLATINA</span>
+        <span>&#xA9; {{date('Y')}}. By <a href="https://www.youtube.com/channel/UC8HrnYy-RaLof9VyYgTjMgg" target="_blank"><i class="fa fa-youtube"></i> CONTROLE DE PLATINA</a></span>
     </p>
     <!-- END Footer -->
 </div>

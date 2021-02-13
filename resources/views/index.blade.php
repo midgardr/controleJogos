@@ -6,7 +6,7 @@
     <!-- Enable responsiveness on mobile devices-->
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>
-        CONTROLE DE PLATINA | CATÁLOGO
+        CONTROLE DE PLATINA
     </title>
     <!--START Loader -->
     <style>
@@ -70,7 +70,7 @@
                     <!-- START Right Side Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{route('formLogin')}}" class="btn btn-primary">LOGIN <i class="fa fa-lg fa-sign-in" title="Login"></i></a>
+                            <a href="{{route('formLogin')}}" class="btn btn-primary" role="button">LOGIN <i class="fa fa-lg fa-sign-in" title="Login"></i></a>
                         </li>
                     </ul>
                     <!-- END Right Side Navbar -->
@@ -84,7 +84,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 sub-navbar-column">
-
                     </div>
                 </div>
             </div>
@@ -142,8 +141,7 @@
     </div>
     <!-- START Footer -->
     <p style="margin-left: 10px; padding-top: 10px;">
-        <strong class="m-r-1">CATÁLOGO DE JOGOS</strong>
-        <span>&#xA9; {{date('Y')}}. By CONTROLE DE PLATINA</span>
+        <span>&#xA9; {{date('Y')}}. By <a href="https://www.youtube.com/channel/UC8HrnYy-RaLof9VyYgTjMgg" target="_blank"><i class="fa fa-youtube"></i> CONTROLE DE PLATINA</a></span>
     </p>
     <!-- END Footer -->
 </div>
