@@ -181,13 +181,13 @@
                     modal.find('#btnJogoDelete').attr('href', 'http://controledeplatina.com.br/restrita/jogo/'+jogoId+'/delete');
                 })
             @endif
-            window.onload = function() {
+            /*window.onload = function() {
                 MaskedInput({
                     elm: document.getElementById('platinado_em'),
                     format: '__/__/____',
                     separator: '/'
                 });
-            };
+            };*/
             Dashboard.Helpers.elementExists('#daterangepicker-container', function() {
                 $('.date').daterangepicker({
                     autoUpdateInput: false,

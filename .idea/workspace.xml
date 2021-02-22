@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fdc9378e-c5b2-40f5-b115-b869ce10d0e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/cadastro.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cadastro.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/esqueciSenha.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/esqueciSenha.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JogoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Jogo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Jogo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/jogo/dados.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restrita/template.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/template.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/template.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +223,13 @@
       <workItem from="1611865451541" duration="4719000" />
       <workItem from="1612818028687" duration="310000" />
       <workItem from="1612890901060" duration="9000" />
-      <workItem from="1613176160357" duration="5591000" />
+      <workItem from="1613176160357" duration="5622000" />
+      <workItem from="1613217000792" duration="1818000" />
+      <workItem from="1613222730644" duration="2238000" />
+      <workItem from="1613246308251" duration="185000" />
+      <workItem from="1613300934863" duration="1000000" />
+      <workItem from="1613394556131" duration="19000" />
+      <workItem from="1614025861555" duration="30000" />
     </task>
     <servers />
   </component>

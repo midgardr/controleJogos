@@ -184,7 +184,7 @@
         </div>
         <div class="col-lg-4 m-t-2">
             <div class="panel panel-default no-bg b-a-2 b-gray-dark">
-                <div class="panel-heading">PLATINAS (ÚNCIOS X REPETIDOS)</div>
+                <div class="panel-heading">PLATINAS (ÚNICOS X REPETIDOS)</div>
                 <div class="panel-body">
                     <div class="unicos-repetidos"></div>
                 </div>

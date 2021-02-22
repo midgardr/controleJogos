@@ -104,7 +104,7 @@
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                     <div id="daterangepicker-container">
-                                        <input type="text" class="form-control" name="platinado_em" id="platinado_em" value="{{isset($jogo)?$jogo->platinado_em:old('platinado_em')}}">
+                                        <input type="date" class="form-control" name="platinado_em" id="platinado_em" value="{{(isset($jogo) and !empty($jogo->platinado_em))?\Carbon\Carbon::createFromFormat('d/m/Y', $jogo->platinado_em)->format('Y-m-d'):old('platinado_em')}}">
                                     </div>
                                 </div>
                             </div>

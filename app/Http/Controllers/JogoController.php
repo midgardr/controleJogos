@@ -18,7 +18,7 @@ class JogoController extends Controller{
         'PSVita',
         'PS5'
     ];
-    private $publishers = ['2Awesome','2Dream','505 Games','70 Times 7, LLC','A Crowd of Monsters','Activision Blizzard','Aksys Games','Apple','Aquiris Game Studio','Aria','Artifex Mundi','Atlus','Bandai Namco','Bethesda Softworks','Billy Goat Entertainment','Blowfish Studios','Capcom','Chubby Pixel','Circle Entertainment','Cococucumber','Coffee Stain Studios','Cooply Solutions','Crazy Monkey Studios','Creative Bytes Studios','Curve Digital','Daedalic Entertainment','Deep Silver','Devolver Digital','Digital Touch Co','Disney Interactive Studios','Double Eleven','Double Fine','Dramaticcreate','EA','EastAsiaSoft','Ember Lab','Endemol Uk Limited','Entergram','Envolved Games','Fair Play Labs','Focus Home Interactive','Frozenbyte','Fullbright','Funbox Media','Gamemill Entertainment','Gammera Nest','Gearbox','Gnomic Studios','Google','Granzella','Green Lava Studios','Groovy Milk','Ground Shatter','Harukaze','Hunex','Infinite Madaa','Intragames','Ivanovich Games','JP: Idea Factory','Kalypso Media Digital','Kingdom Media','Koei Tecmo','Konami','Level 77 Pty','Lightwood Games','Lillymo Games','Lucas Arts','Merge Games Limited','MichaelArts','Microsoft','Mighty Rabbit Studios','NIS America','National Westminster Bank','Necrophone Games','NetEase','NiKo MaKi','Nintendo','Nippon Ichi Software','Oasis Games','Otterrific Games','Outra','Owlgorithm','PQube','Paradox Interactive','Phosphor Games','Pixel Maniacs','Playrise Digital','Product ID','Prototype','Psyonix','Radial Games','Rain Games','Rainy Night Creations','Ratalaika Games','Rockin Heart Games','SakuraGame','Sega','Shanghai Kena','Slang','Slitherine Strategies','Smobile','Soedesco','Sometimes You','Sony','Spike Chunsoft','Sprite','Square-Enix','Studio MDHR','THQ','Take-Two','Team Cherry','Telltale Games','Tencent Games','Top Rated','Ubisoft','Unfinished Pixel','VRWERX','Vector Unit','Victory Road','Vision Games','Wales Interactive','Warner Bros.','Wired Productions','X.D. Network Inc','Zen Studios','Zodiac Interactive'];
+    private $publishers = ['2Awesome','2Dream','505 Games','70 Times 7, LLC','A Crowd of Monsters','Activision Blizzard','Aksys Games','Apple','Aquiris Game Studio','Aria','Artifex Mundi','Atlus','Bandai Namco','Bethesda Softworks','Billy Goat Entertainment','Blowfish Studios','Capcom','Chubby Pixel','Circle Entertainment','Cococucumber','Coffee Stain Studios','Cooply Solutions','Crazy Monkey Studios','Creative Bytes Studios','Curve Digital','Daedalic Entertainment','Deep Silver','Devolver Digital','Digital Touch Co','Disney Interactive Studios','Double Eleven','Double Fine','Dramaticcreate', 'D3PUBLISHER Inc','EA','EastAsiaSoft','Ember Lab','Endemol Uk Limited','Entergram','Envolved Games','Fair Play Labs','Focus Home Interactive','Frozenbyte','Fullbright','Funbox Media','Gamemill Entertainment','Gammera Nest','Gearbox','Gnomic Studios','Google','Granzella','Green Lava Studios','Groovy Milk','Ground Shatter','Harukaze','Hunex','Infinite Madaa','Intragames','Ivanovich Games','JP: Idea Factory','Kalypso Media Digital','Kingdom Media','Koei Tecmo','Konami','Level 77 Pty','Lightwood Games','Lillymo Games','Lucas Arts','Merge Games Limited','MichaelArts','Microsoft','Mighty Rabbit Studios','NIS America','National Westminster Bank','Necrophone Games','NetEase','NiKo MaKi','Nintendo','Nippon Ichi Software','Oasis Games','Otterrific Games','Outra','Owlgorithm','PQube','Paradox Interactive','Phosphor Games','Pixel Maniacs','Playrise Digital','Product ID','Prototype','Psyonix','Radial Games','Rain Games','Rainy Night Creations','Ratalaika Games', 'Rebellion Developments', 'Rockin Heart Games','SakuraGame','Sega','Shanghai Kena','Slang','Slitherine Strategies','Smobile','Soedesco','Sometimes You','Sony','Spike Chunsoft','Sprite','Square-Enix','Studio MDHR','THQ','Take-Two','Team Cherry','Telltale Games','Tencent Games','Top Rated','Ubisoft','Unfinished Pixel','VRWERX','Vector Unit','Victory Road','Vision Games','Wales Interactive','Warner Bros.','Wired Productions','X.D. Network Inc','Zen Studios','Zodiac Interactive','S.R.L. RandomSpin-Games', 'Young Horses'];
     private $dificuldades = [
         'Garapa',
         'Fácil',
@@ -133,7 +133,7 @@ class JogoController extends Controller{
             $jogo->exclusivo = $request->exclusivo;
             $jogo->repetido = $request->repetido;
             $jogo->dificuldade = $request->dificuldade;
-            if ($request->platinado_em != '__/__/____') {
+            if (!empty($request->platinado_em)) {
                 $jogo->situacao = 'Platinado';
                 $jogo->platinado_em = $request->platinado_em;
             } else {
@@ -180,7 +180,7 @@ class JogoController extends Controller{
                 $jogo->exclusivo = $request->exclusivo;
                 $jogo->repetido = $request->repetido;
                 $jogo->dificuldade = $request->dificuldade;
-                if ($request->platinado_em != '__/__/____') {
+                if (!empty($request->platinado_em)) {
                     $jogo->situacao = 'Platinado';
                     $jogo->platinado_em = $request->platinado_em;
                 } else {
